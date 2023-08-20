@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Taxi Fare Calculator</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&libraries=places"></script>
+</head>
+<body>
+    <h1>Taxi Fare Calculator</h1>
+    <form action="{% url 'calculate_taxi_fare' %}" method="post">
+        {% csrf_token %}
+        <label for="origin">Origin:</label>
+        <input type="text" id="origin" name="origin">
+        <br>
+        <label for="destination">Destination:</label>
+        <input type="text" id="destination" name="destination">
+        <br>
+        <button type="submit">Calculate Fare</button>
+    </form>
+    <div id="map"></div>
+    <iframe src="https://storage.googleapis.com/maps-solutions-pwe3qngln2/commutes/r7z9/commutes.html"
+    width="100%" height="100%"
+    style="border:0;"
+    loading="lazy">
+  </iframe>
+</body>
+</html>
