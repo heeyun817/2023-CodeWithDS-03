@@ -6,9 +6,13 @@
   <title>Document</title>
 </head>
 <body>
+  {% if request.user == board.user %}
+  수정
+  {% endif %}
   <p>{{board.s_title}}</p>
   <p>{{board.d_title}}</p>
   <p>{{board.people}}</p>
+  
 
 
   <!--title로 지도에서 검색 후 latlng 받아오는 것......?-->

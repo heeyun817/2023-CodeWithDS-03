@@ -1,8 +1,10 @@
 from django.db import models
 from django.utils import timezone
+from accounts.models import User
 
 # Create your models here.
 class Board(models.Model):
+    #user = models.ForeignKey(User, on_delete=models.CASCADE)
     s_title = models.CharField(max_length=20)
     #출발지
     d_title = models.CharField(max_length=20)
