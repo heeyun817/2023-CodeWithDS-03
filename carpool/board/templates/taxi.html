@@ -1,26 +1,41 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Taxi Fare Calculator</title>
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&libraries=places"></script>
-</head>
-<body>
-    <h1>Taxi Fare Calculator</h1>
-    <form action="{% url 'calculate_taxi_fare' %}" method="post">
-        {% csrf_token %}
-        <label for="origin">Origin:</label>
-        <input type="text" id="origin" name="origin">
-        <br>
-        <label for="destination">Destination:</label>
-        <input type="text" id="destination" name="destination">
-        <br>
-        <button type="submit">Calculate Fare</button>
-    </form>
-    <div id="map"></div>
-    <iframe src="https://storage.googleapis.com/maps-solutions-pwe3qngln2/commutes/r7z9/commutes.html"
-    width="100%" height="100%"
-    style="border:0;"
-    loading="lazy">
-  </iframe>
-</body>
-</html>
+<div id="map" style="width:750px;height:350px;"></div>
+
+<script>
+	var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
+	var mapOption = {
+		center: new kakao.maps.LatLng(37.56659, 126.97907), // 지도의 중심좌표
+		level: 2, // 지도의 확대 레벨
+		mapTypeId: kakao.maps.MapTypeId.ROADMAP // 지도종류
+	}; 
+	// 지도를 생성한다 
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+	// 마커를 클릭한 위치에 생성하는 함수
+	function addMarker(position) {
+		var marker = new kakao.maps.Marker({
+			position: position, // 클릭한 위치의 좌표
+			map: map // 마커를 표시할 지도 객체
+		});
+	}
+
+	// 지도 클릭 이벤트를 등록한다
+	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+		var clickedLatLng = mouseEvent.latLng;
+		addMarker(clickedLatLng); // 클릭한 위치에 마커 추가
+		console.log('지도에서 클릭한 위치의 좌표는 ' + clickedLatLng.toString() + ' 입니다.');
+	});	
+  
+	// 지도에 선을 표시한다
+	var polyline = new kakao.maps.Polyline({
+		map: map, // 선을 표시할 지도 객체 
+		path: [ // 선을 구성하는 좌표 배열
+			new kakao.maps.LatLng(37.56659, 126.97807),
+			new kakao.maps.LatLng(37.56709, 126.97857),
+			new kakao.maps.LatLng(37.56709, 126.97807)
+		],
+		strokeWeight: 3, // 선의 두께
+		strokeColor: '#FF0000', // 선 색
+		strokeOpacity: 0.9, // 선 투명도
+		strokeStyle: 'solid' // 선 스타일
+	});	
+</script>
