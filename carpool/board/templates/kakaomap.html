@@ -370,8 +370,8 @@
     // }
     
     function calculate_taxi() {
-        var apiUrl1 = "https://map.kakao.com/?map_type=TYPE_MAP&target=car&/link/from/" + encodeURIComponent(start.value)+ "," + encodeURIComponent(startLat.innerText) + "/to/" + encodeURIComponent(end.value)+ "," + encodeURIComponent(endLat.innerText);
-        var apiUrl = "http://127.0.0.1:8000/board/proxy-request/?url=" + encodeURIComponent(apiUrl1);
+        var apiUrl1 = "https://map.kakao.com/link/from/" + encodeURIComponent(start.value)+ "," + encodeURIComponent(startLat.innerText) + "/to/" + encodeURIComponent(end.value)+ "," + encodeURIComponent(endLat.innerText);
+        window.location.href=apiUrl1;
         
         fetch(apiUrl)
             .then(response => {

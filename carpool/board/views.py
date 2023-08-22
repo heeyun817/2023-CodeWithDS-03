@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 #import googlemaps
 from carpool import settings
@@ -29,6 +29,9 @@ import requests
 
 
 
+def list(request):
+    boardlist = Board.objects.all().order_by('-pk')
+    return render(request, "list.html", {"boardlist": boardlist})
 
 
 def create(request):
@@ -40,6 +43,7 @@ def create(request):
         board.people = request.POST.get("people")
         board.star = False
         board.content = request.POST.get("content")
+        board.total = request.POST.get("total")
         board.save()
     return render(request, 'kakaomap.html')
 
@@ -47,6 +51,27 @@ def create(request):
 def detail(request, pk):
     board = Board.objects.get(pk=pk)
     return render(request, "detail.html", {"board":board})
+
+
+def update(request, pk):
+    board = Board.objects.get(pk=pk)
+    if request.method == "POST":
+        board.s_title = request.POST.get("start")
+        board.d_title = request.POST.get("end")
+        board.date = request.POST.get("date")
+        board.people = request.POST.get("people")
+        board.star = board.star
+        board.content = request.POST.get("content")
+        board.total = request.POST.get("total")
+        board.save()
+        return redirect("board:detail", pk)
+    return render(request, "update.html", {"board": board})
+
+
+def delete(request, pk):
+    board = Board.objects.get(pk=pk)
+    board.delete()
+    #목록으로 이동
 
 
 def taxi(request):
