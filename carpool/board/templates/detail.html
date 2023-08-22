@@ -7,11 +7,13 @@
 </head>
 <body>
   {% if request.user == board.user %}
-  수정
+  <a href="{% url 'board:update' board.pk %}">수정</a>
+  <a href="{% url 'board:delete' board.pk %}">삭제</a>
   {% endif %}
   <p>{{board.s_title}}</p>
   <p>{{board.d_title}}</p>
   <p>{{board.people}}</p>
+  <p>현재 몇 명{{board.completion}}</p>
   
 
 

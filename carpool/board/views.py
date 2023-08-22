@@ -6,6 +6,7 @@ from django.http import JsonResponse
 #import googlemaps
 from carpool import settings
 from board.models import Board
+from django.contrib.auth.models import User
 import requests
 
 #def home(request):
@@ -37,6 +38,7 @@ def list(request):
 def create(request):
     if request.method == "POST":
         board = Board()
+        board.user = User.objects.get(pk = request.user.pk)
         board.s_title = request.POST.get("start")
         board.d_title = request.POST.get("end")
         board.date = request.POST.get("date")
@@ -45,6 +47,7 @@ def create(request):
         board.content = request.POST.get("content")
         board.total = request.POST.get("total")
         board.completion = False
+        board.now_people = 0
         board.save()
         return redirect("board:list")
     return render(request, 'kakaomap.html')
@@ -58,6 +61,7 @@ def detail(request, pk):
 def update(request, pk):
     board = Board.objects.get(pk=pk)
     if request.method == "POST":
+        #board.user = board.user
         board.s_title = request.POST.get("start")
         board.d_title = request.POST.get("end")
         board.date = request.POST.get("date")
@@ -65,7 +69,19 @@ def update(request, pk):
         board.star = board.star
         board.content = request.POST.get("content")
         board.total = request.POST.get("total")
-        board.completion = request.POST.get("completion")
+        completion_value = request.POST.get("completion")
+        #다 구해지면 체크
+        if completion_value == "on":
+            board.completion = True
+        elif completion_value == None:
+            board.completion = False
+        print("Completion value:", request.POST.get("completion"))
+
+        board.now_people = request.POST.get("now_people")
+
+        #현재 구한 사람과 구하려는 사람이 동일하다면 다 구해진 것
+        if board.people == board.now_people and board.completion == False:
+            board.completion = True
         board.save()
         return redirect("board:detail", pk)
     return render(request, "update.html", {"board": board})
