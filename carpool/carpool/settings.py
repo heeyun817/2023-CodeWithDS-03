@@ -45,10 +45,11 @@ INSTALLED_APPS = [
     'mainapp',
     'board',
     'accounts',
+    #채팅
+    'channels',
 
 
 ]
-
 
 
 GOOGLE_MAPS_API_KEY = 'AIzaSyAtoiOxIuDVSOiGRLzxiSyshAbW5ymFmGc'
