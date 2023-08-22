@@ -31,6 +31,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # 이메일 인증 라이브러리 설치했어요
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mainapp',
     'board',
+    'accounts',
 
 
 ]
@@ -106,6 +112,19 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# 이메일 인증 을 위해
+AUTHENTICATION_BACKENDS = [
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.duksung.ac.kr'  # duksung.ac.kr의 SMTP 서버 주소
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'your_email@duksung.ac.kr'  # 보내는 이메일 계정
+EMAIL_HOST_PASSWORD = 'your_email_password'  # 보내는 이메일 계정의 비밀번호
+DEFAULT_FROM_EMAIL = 'your_email@duksung.ac.kr'  # 보내는 이메일 계정
 
 
 # Internationalization
