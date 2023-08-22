@@ -17,6 +17,9 @@ class Board(models.Model):
     people = models.PositiveIntegerField()
     #몇 명 모집?
     total = models.PositiveIntegerField()
+    #얼마?
+    completion = models.BooleanField(default=False)
+    #구함 완료
 
 
     def __str__(self):

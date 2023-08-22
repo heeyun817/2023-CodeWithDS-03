@@ -12,5 +12,7 @@ urlpatterns = [
     path('proxy-request/', views.proxy_request, name='proxy_request'),
     path('update/<int:pk>/', views.update, name="update"),
     path('delete/<int:pk>/', views.delete, name="delete"),
-    
+    path("", views.list, name="list"),
+
+
 ]

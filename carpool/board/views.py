@@ -44,7 +44,9 @@ def create(request):
         board.star = False
         board.content = request.POST.get("content")
         board.total = request.POST.get("total")
+        board.completion = False
         board.save()
+        return redirect("board:list")
     return render(request, 'kakaomap.html')
 
 
@@ -63,6 +65,7 @@ def update(request, pk):
         board.star = board.star
         board.content = request.POST.get("content")
         board.total = request.POST.get("total")
+        board.completion = request.POST.get("completion")
         board.save()
         return redirect("board:detail", pk)
     return render(request, "update.html", {"board": board})
