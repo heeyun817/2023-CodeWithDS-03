@@ -8,8 +8,9 @@
 <body>
   {% for board in boardlist %}
     {% if board.completion == False %}
-      {{ board.s_title }} -
-      {{ board.d_title }}
+      <a href="{% url 'board:detail' board.pk %}">{{ board.s_title }} -
+        {{ board.d_title }}</a>
+      <span class="time">{{ board.create |timesince|cut:", " }} 전</span>
     {% endif %}
   {% endfor %}
 </body>
