@@ -72,11 +72,12 @@
         <input type="text" name="content">
         몇 명?
         <input type="number" name="people" min="2">
-        <input type="number" name="total" min="0">
+        <input type="number" name="total" id="total" value="" min="0">
         <input type="submit" value="모집">
       </form>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b0f2580ce945daf279b051132dda23e&libraries=services"></script>
     <button id="calculate">예상 택시비 보기</button>
+    <button id="find">길찾기</button>
     <p id="startid">출발</p>
     <p id="endid">도착</p>
     <script>
@@ -86,9 +87,13 @@
     var startLat = document.getElementById('startid');
     var endLat = document.getElementById('endid');
     var intermarker = startLat;
-    var button = document.getElementById('calculate');
+    var button = document.getElementById('find');
+    var calculate = document.getElementById('calculate');
+    var total = document.getElementById('total');
     var markers = [];
     var interText = start;
+    var startnavilat, startnavilng, endnavilat, endnavilng;
+
 
     start.addEventListener("click", function() {
         interText = start;
@@ -214,7 +219,7 @@
                     interText.value = marker.getTitle();
                     intermarker.innerText = marker.getPosition();
                     intermarker.innerText = removeBrackets(intermarker.innerText);
-                    
+                    splitCoordinates(intermarker.innerText);
                 })
     
                 itemEl.onmouseover =  function () {
@@ -346,6 +351,23 @@
         return inputStr;
     }
 
+    function splitCoordinates(coordinates) {
+        var parts = coordinates.split(", ");
+        if (parts.length === 2) {
+            if (interText == start) {
+                startnavilat = parseFloat(parts[0]);
+                startnavilng = parseFloat(parts[1]);
+                startnavilng+=","+(startnavilat);
+                console.log(startnavilng)
+            }
+            else {
+                endnavilat = parseFloat(parts[0]);
+                endnavilng = parseFloat(parts[1]);
+                endnavilng+=","+(endnavilat);
+            }
+        }
+    }
+
 
     button.addEventListener("click", function() {
         console.log(start.value);
@@ -382,6 +404,40 @@
                 console.error('Error:', error);
             });
     }
+
+    //네비 택시비 가져오도록 수정할 예정
+
+
+    calculate.addEventListener("click", function() {
+        console.log("여기까지 들어옴");
+        info_navi();
+    })
+
+    function info_navi() {
+        var apiUrl = "https://apis-navi.kakaomobility.com/v1/directions?origin=" + startnavilng + "&destination=" + endnavilng; 
+        console.log(apiUrl);
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", apiUrl);
+        xhr.setRequestHeader("Authorization", "KakaoAK 74e35e48abc1233b73a7e70ce65dc500");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    console.log(response);
+
+                    const taxiFare = response.routes[0].summary.fare.taxi; // response 객체에서 값을 가져옴
+                    console.log(taxiFare);
+                    
+                    total.value = parseInt(taxiFare);
+                } else {
+                    console.error("AJAX request error:", xhr.statusText);
+                }
+            }
+        };
+
+        xhr.send();
+    }
+
     </script>
 </body>
 </html>
