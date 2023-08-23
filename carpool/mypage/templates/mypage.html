@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>마이페이지</title>
+</head>
+<body>
+    <h1>마이페이지</h1>
+    <p>사용자 이름: {{ user_profile.username }}</p>
+    <p>이메일: {{ user_profile.email }}</p>
+    {% if user_profile.image %}
+        <img src="{{ user_profile.image.url }}" alt="프로필 이미지">
+    {% else %}
+        <img src="{% static 'image/image.png' %}" alt="기본 이미지">
+    {% endif %}
+    <br>
+    <a href="{% url 'mypage:edit_mypage' %}">프로필 수정</a>
+    <p>전화번호: {{ user_profile.phone_number }}</p>
+    <p>가입 일자: {{ user_profile.signup_date }}</p>
+</body>
+</html>
