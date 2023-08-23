@@ -1,0 +1,106 @@
+.page {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px 20px 20px 20px;
+    padding-bottom: 80px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.logoAndTextWrap {
+    width: 200px;
+    height: auto;
+    display: flex;
+    text-align: center;
+    margin-top: 0px;
+}
+
+.logoWrap img {
+    width: 100px;
+    height: auto;
+}
+
+.textWrap {
+    font-size: 30px;
+    font-weight: bold;
+    color: #262626;
+    margin-left: -10px;
+    margin-top: 30px;
+}
+
+.title {
+    margin-top: 10px;
+    font-size: 26px;
+    font-weight: bold;
+    color: #262626;
+    text-align: center;
+}
+
+.contentWrap {
+    margin-top: 50px;
+    flex: 1;
+}
+
+.inputTitle {
+    font-size: 12px;
+    font-weight: 600;
+    color: #262626;
+}
+
+.inputWrap {
+    display: flex;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 8px;
+    background-color: white;
+    border: 1px solid #e2e0e0;
+}
+
+.inputWrapClear{
+    display: flex;
+    padding: 8px;
+    margin-top: 4px;
+    background-color: white;
+}
+
+.inputWrap:focus-within {
+    border: 1px solid #8b2845;
+}
+
+.input {
+    width: 100%;
+    outline: none;
+    border: none;
+    height: 17px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.input::placeholder {
+    color: #dadada;
+}
+
+.bottomButton {
+    width: 92%;
+    height: 48px;
+    border: none;
+    font-weight: 700;
+    background-color: #8b2845;
+    border-radius: 64px;
+    color: white;
+    margin-bottom: 16px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 16px;
+}
+
+.bottomButton:disabled {
+    background-color: #dadada;
+    color: white;
+}
