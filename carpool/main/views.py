@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.db.models import Q
 from board.models import Board
-
+ 
 def search(request):
     return render(request, 'search.html')
 
