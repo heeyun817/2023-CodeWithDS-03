@@ -6,9 +6,13 @@
 </head>
 <body>
 <div id="chat-box">
+  {% if messages == None %}
+  채팅을 남겨보세요
+  {% else %}
     {% for message in messages %}
     <p>{{ message.sender.username }}: {{ message.message }} ({{ message.timestamp }})</p>
     {% endfor %}
+  {% endif %}
 </div>
 <form id="chat-form">
     <div id="user-id" data-user-id="{{ request.user.id }}"></div>
@@ -24,7 +28,7 @@
 
         function fetchMessages() {
             $.ajax({
-                url: "{% url 'channels:get_messages'%}",  // Change this URL to the endpoint that fetches messages
+                url: "{% url 'channels:get_messages' chatroom.pk %}",  // Change this URL to the endpoint that fetches messages
                 success: function(data) {
                     $("#chat-box").html(data);
                 }
@@ -37,7 +41,7 @@
             var userId = $("#user-id").data("user-id");
             $.ajax({
                 method: "POST",
-                url: "send_message/",
+                url:"{% url 'channels:send_message' chatroom.pk %}",
                 headers: { "X-CSRFToken": csrftoken },
                 data: { message: message,  user: userId },
                 success: function() {
