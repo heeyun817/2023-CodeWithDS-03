@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>프로필 수정</title>
+</head>
+<body>
+    <h1>프로필 수정</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input type="text" name="username" value="{{ user.username }}"><br>
+        {% if user_profile.image %}
+        <p>현재 프로필 사진:</p>
+        <img src="{{ user_profile.image.url }}" alt="현재 프로필 사진">
+    {% else %}
+        <p>프로필 이미지 없음</p>
+    {% endif %}
+        {{ form.as_p }}
+        <button type="submit">저장</button>
+    </form>
+</body>
+</html>

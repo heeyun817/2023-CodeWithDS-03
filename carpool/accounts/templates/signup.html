@@ -2,10 +2,38 @@
 <html>
 <head>
     <title>회원가입</title>
+    <script>
+        function validateEmail() {
+            var emailInput = document.getElementById('id_email');
+            var emailErrorMessage = document.getElementById('email-error');
+            
+            if (!emailInput.value.endsWith('@duksung.ac.kr')) {
+                emailErrorMessage.textContent = '덕성여자대학교 이메일 주소를 사용해야 합니다.';
+                return false;
+            } else {
+                emailErrorMessage.textContent = '';
+                return true;
+            }
+        }
+        
+        function validatePasswords() {
+            var password1Input = document.getElementById('id_password1');
+            var password2Input = document.getElementById('id_password2');
+            var passwordErrorMessage = document.getElementById('password-error');
+            
+            if (password1Input.value !== password2Input.value) {
+                passwordErrorMessage.textContent = '비밀번호가 일치하지 않습니다.';
+                return false;
+            } else {
+                passwordErrorMessage.textContent = '';
+                return true;
+            }
+        }
+    </script>
 </head>
 <body>
     <h1>회원가입</h1>
-    <form method="POST">
+    <form method="POST" onsubmit="return validateEmail() && validatePasswords();">
         {% csrf_token %}
         
         <div>
@@ -16,6 +44,7 @@
         <div>
             <label for="{{ form.email.id_for_label }}">Email:</label>
             {{ form.email }}
+            <p id="email-error" style="color: red;"></p>
         </div>
         
         <div>
@@ -30,11 +59,13 @@
         <div>
             <label for="{{ form.password2.id_for_label }}">Confirm Password:</label>
             {{ form.password2 }}
+            <p id="password-error" style="color: red;"></p>
         </div>
         
         <input type="submit" value="Sign Up">
     </form>
 </body>
 </html>
+
 
 
