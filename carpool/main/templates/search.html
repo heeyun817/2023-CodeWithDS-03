@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>게시판 검색</h1>
+    <form method="GET" action="{% url 'main:search_result' %}">
+        <input type="text" name="search_text" placeholder="검색어 입력">
+        <br>
+        <input type="radio" name="search_type" value="s_title" checked> 출발지 검색
+        <input type="radio" name="search_type" value="d_title"> 도착지 검색
+        <br>
+        <button type="submit">검색</button>
+        <br>
+        <button type="submit" name="search_text" value="수유역">수유역</button>
+        <button type="submit" name="search_text" value="서울역">서울역</button>
+        <button type="submit" name="search_text" value="덕성여대 정문">덕성여대 정문</button>
+        <button type="submit" name="search_text" value="덕성여대 후문">덕성여대 후문</button>
+    </form>
+
+<button onclick="redirectToBoard()">직접 찾아보기</button><br>
+<button onclick="createNewPost()">함께 할 멤버 직접 모아보기</button>
+
+<script>
+    function redirectToBoard() {
+        window.location.href = "{% url 'board:list' %}";
+    }
+
+    function createNewPost() {
+        window.location.href = "{% url 'board:create' %}";
+    }
+</script>
+
+</body>
+</html>
