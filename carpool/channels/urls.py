@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import chat_view, get_messages, send_message, create_chat_room, chat_view
+from .views import chat_view, get_messages, send_message, create_chat_room, chat_view, update_people_count
 
 app_name="channels"
 
@@ -9,5 +9,6 @@ urlpatterns = [
     path('send_message/<int:pk>/', send_message, name='send_message'),
     path('create_chat_room/<int:pk>/', create_chat_room, name='create_chat_room'),
     path('chat_view/<int:pk>/',chat_view, name="chat_room" ),
+    path('update_people_count/<int:pk>/', update_people_count, name="update_people_count" ),
 
 ]

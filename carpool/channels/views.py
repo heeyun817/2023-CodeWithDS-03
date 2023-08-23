@@ -70,3 +70,16 @@ def chat_view(request, pk):
         messages = ChatMessage.objects.filter(chatRoom=chatroom)
         return redirect("channels:chat_room", pk, {'messages': messages , 'chatroom':chatroom})
     return render(request, 'chat.html', {'messages': messages , 'chatroom':chatroom})
+
+
+
+def update_people_count(request, pk):
+    if request.method == "POST":
+        chatroom = ChatRoom.objects.get(pk=pk)
+        board = Board.objects.get(pk=chatroom.board.pk)
+        if board.now_people >= board.people:
+            return redirect("board:list")
+        board.now_people += 1
+        board.save()
+        return HttpResponse("People count updated", status=200)
+    return HttpResponse("Invalid request", status=400)

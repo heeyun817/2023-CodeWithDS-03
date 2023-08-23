@@ -21,10 +21,28 @@
     <button type="submit" id="send-button">Send</button>
 </form>
 
+<button type="submit" id="join">함께하기 결정</button>
+
 <script>
-    $(document).ready(function() {
+      $(document).ready(function() {
         // Get CSRF token
         var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+
+    document.getElementById("join").addEventListener("click", function() {
+      // AJAX 요청 보내기
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "{% url 'channels:update_people_count' chatroom.pk %}", true);
+      //xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.setRequestHeader("X-CSRFToken", csrftoken);
+      xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              console.log("People count updated successfully");
+          }
+      };
+
+      xhr.send("board_id={{ board.id }}");  // board.id 대신 실제 board의 ID 값을 전달해야 함
+  });
+
 
         function fetchMessages() {
             $.ajax({
