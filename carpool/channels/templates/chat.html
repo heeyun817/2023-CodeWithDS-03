@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div id="chat-box">
+    {% for message in messages %}
+    <p>{{ message.sender }}: {{ message.message }} ({{ message.timestamp }})</p>
+    {% endfor %}
+</div>
+<form id="chat-form">
+    {% csrf_token %}
+    <input type="text" id="message-input" placeholder="Type your message">
+    <button type="submit" id="send-button">Send</button>
+</form>
+
+    <script>
+        function fetchMessages() {
+            $.ajax({
+                url: "get_messages/",  // Change this URL to the endpoint that fetches messages
+                success: function(data) {
+                    $("#chat-box").html(data);
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            fetchMessages();
+
+            $(document).ready(function() {
+        // Get CSRF token
+        var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+
+        function fetchMessages() {
+            // ...
+        }
+
+        $("#chat-form").submit(function(e) {
+            e.preventDefault();
+            var message = $("#message-input").val();
+            $.ajax({
+                method: "POST",
+                url: "send_message/",
+                headers: { "X-CSRFToken": csrftoken },
+                data: { message: message },
+                success: function() {
+                    $("#message-input").val("");
+                    fetchMessages();
+                }
+            });
+        });
+
+            setInterval(fetchMessages, 3000);  // Fetch messages every 3 seconds
+        });
+      }
+        );
+    </script>
+</body>
+</html>

@@ -25,6 +25,7 @@ urlpatterns = [
     path('mainapp/', include('mainapp.urls', namespace="mainapp") ),
     path('board/', include('board.urls', namespace='board')),
     path('accounts/', include('accounts.urls', namespace='accounts')),
+    path('chat/', include('channels.urls', namespace='channels')),
     path('mypage/', include('mypage.urls', namespace='mypage')),
 ]
 

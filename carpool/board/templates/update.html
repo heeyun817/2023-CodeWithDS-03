@@ -72,8 +72,16 @@
         <input type="text" name="content" value="{{board.content}}">
         몇 명?
         <input type="number" name="people" min="2" value="{{board.people}}">
+        현재 몇 명
+        <input type="number" name="now_people" value="{{board.now_people}}" min="0" max="{{board.people}}">
         <input type="number" name="total" min="0" value="{{board.total}}">
-        <input type="range" name="completion" value="{{board.completion}}">
+        모두 구해짐
+        {% if board.completion == True %}
+        <input type="checkbox" name="completion" checked>
+        {% else %}
+        <input type="checkbox" name="completion">
+        {% endif %}
+        
         <input type="submit" value="수정">
       </form>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b0f2580ce945daf279b051132dda23e&libraries=services"></script>

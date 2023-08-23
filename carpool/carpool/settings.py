@@ -44,10 +44,11 @@ INSTALLED_APPS = [
     'mainapp',
     'board',
     'accounts',
+    #채팅
+    'channels',
     'mypage',
     'main'
 ]
-
 
 
 GOOGLE_MAPS_API_KEY = 'AIzaSyAtoiOxIuDVSOiGRLzxiSyshAbW5ymFmGc'

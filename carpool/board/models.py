@@ -1,10 +1,10 @@
 from django.db import models
 from django.utils import timezone
-from accounts.models import User
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Board(models.Model):
-    #user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user")
     s_title = models.CharField(max_length=20)
     #출발지
     d_title = models.CharField(max_length=20)
@@ -22,6 +22,8 @@ class Board(models.Model):
     #얼마?
     completion = models.BooleanField(default=False)
     #구함 완료
+    now_people = models.PositiveIntegerField()
+    #현재까지 몇 명 구함
 
 
     def __str__(self):
