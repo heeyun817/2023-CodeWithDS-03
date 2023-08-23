@@ -29,11 +29,18 @@
                 return true;
             }
         }
+        
+        function validateForm() {
+            var emailValid = validateEmail();
+            var passwordsValid = validatePasswords();
+            
+            return emailValid && passwordsValid;
+        }
     </script>
 </head>
 <body>
     <h1>회원가입</h1>
-    <form method="POST" onsubmit="return validateEmail() && validatePasswords();">
+    <form method="POST" id="signup-form" action="{% url 'accounts:signup' %}" onsubmit="return validateForm();">
         {% csrf_token %}
         
         <div>
@@ -47,9 +54,7 @@
             <p id="email-error" style="color: red;"></p>
         </div>
         
-        <div>
-            <a href="{% url 'accounts:verify_email' %}">이메일 인증하기</a>
-        </div>
+ 
 
         <div>
             <label for="{{ form.password1.id_for_label }}">Password:</label>
@@ -66,6 +71,7 @@
     </form>
 </body>
 </html>
+
 
 
 
