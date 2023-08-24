@@ -1,18 +1,86 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login/login.css' %}">
+    <!--<script src="{% static 'login/login.js' %}"></script>-->
+
+    <title>Login Page</title>
 </head>
-<body>
-    <h1>Login</h1>
-    <form method="POST">
-        {% csrf_token %}
-        <label for="username">Username:</label>
-        <input type="text" name="username" required><br>
-        <label for="password">Password:</label>
-        <input type="password" name="password" required><br>
-        <input type="submit" value="Log In">
-    </form>
-    <p><a href="{% url 'accounts:signup' %}">Sign Up</a></p>
-</body>
-</html>
+<body style = "margin:0px">
+
+    <body style = "margin:0px">
+        <div class="header">
+            <div>
+                <a href="{% static 'home' %}">홈</a>
+                <a href="./board.html">게시판</a>
+                <a href="./chat.html">채팅방</a>
+                <a href="./myPage.html">마이페이지</a>
+            </div>
+        <!-- n -->
+        </div>
+        
+        <div class="page">
+            <div class="loginText">
+                로그인
+            </div>
+            <div class="contentWrap">
+                <div class="inputTitle">아이디</div>
+                <div class="inputWrap">
+                    <input type="text" id="idInput" class="input" placeholder="">
+                </div>
+    
+                <div style="margin-top: 26px;" class="inputTitle">비밀번호</div>
+                <div class="inputWrap">
+                    <input type="password" id="passwordInput" class="input" placeholder="영문,숫자,특수문자 포함 8자 이상">
+                </div>
+    
+                <div style="margin-top: 20px;" class="membership">
+                    아직 Dukxi회원이 아니신가요?
+                    <button style="margin-left: 6px;" class="membershipButton" onclick="goToSignUp()">지금 가입하기</button>
+                    <script>
+                        function goToSignUp() {
+                            window.location.href = "{% url 'accounts:signup' %}";
+                        }
+                    </script>
+                </div>
+                <div>
+                    <div name="login">
+                    <button id="loginButton" class="bottomButton" disabled onclick="welcome()">
+                        확인
+                    </button>
+                </div>
+                </div>
+            </div>
+        </div>
+        <footer id="footer"></footer>
+    </body>
+
+    <script>
+        function updateButtonStatus() {
+        const idInput = document.getElementById("idInput");
+        const passwordInput = document.getElementById("passwordInput");
+        const loginButton = document.getElementById("loginButton");
+
+        if (idInput.value && passwordInput.value) {
+            loginButton.disabled = false;
+        } else {
+        loginButton.disabled = true;
+        }
+        }
+
+    // 아이디와 비밀번호 입력 시 확인 버튼 상태 업데이트
+    document.addEventListener("input", updateButtonStatus);
+
+    // 로그인 처리 및 main.html로 이동
+    function welcome() {
+        // 로그인 처리 로직을 여기에 작성할 수 있습니다.
+        // 예시: 로그인 로직이 성공했다고 가정하고 알림을 띄우고 main.html로 이동합니다.
+        alert("덕씨님 어서오세요!");
+        window.location.href = "/";
+    }
+    </script>
+    </html>
