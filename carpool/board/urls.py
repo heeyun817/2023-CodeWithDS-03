@@ -13,6 +13,6 @@ urlpatterns = [
     path('update/<int:pk>/', views.update, name="update"),
     path('delete/<int:pk>/', views.delete, name="delete"),
     path("", views.list, name="list"),
-
-
+    path("walk/", views.walkroad, name="walk"),
+    path("safemap/", views.map_view, name="map_view")
 ]

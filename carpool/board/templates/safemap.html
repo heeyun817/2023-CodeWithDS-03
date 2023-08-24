@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Django OpenLayers Example</title>
+    <!-- OpenLayers library import -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/OpenLayers.js"></script>
+</head>
+<body>
+    <div id="map" style="width: 100%; height: 500px;"></div>
+
+    <script>
+
+
+  function addWmsLayer(){
+    param = {
+       name:'범죄주의구간(전체)',
+       serverUrl:'www.safemap.go.kr/openApiService/wms/getLayerData.do?apikey=DMU33P0D-DMU3-DMU3-DMU3-DMU33P0DDN',
+       layername:'A2SM_CRMNLHSPOT_TOT',
+       styles:'A2SM_CrmnlHspot_Tot_Tot'
+      };
+      var wmsLayer = new OpenLayers.Layer.WMS (
+       param.name,
+       param.serverUrl,
+       {
+        layers: ''+param.layername,
+        styles:param.styles,
+        format: 'image/png',
+        exceptions:'text/xml',
+        transparent: true
+       },
+       {
+        isBaseLayer: false
+       }
+      );
+  //map.addLayer(wmsLayer);
+              }
+
+        // 이하 OpenLayers 관련 코드 작성
+    </script>
+</body>
+</html>
