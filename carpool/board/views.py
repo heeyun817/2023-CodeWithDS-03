@@ -6,6 +6,7 @@ from django.http import JsonResponse
 #import googlemaps
 from carpool import settings
 from board.models import Board
+from board.models import WalkBoard
 #from django.contrib.auth.models import User
 from accounts.models import User
 from channels.models import ChatRoom
@@ -120,3 +121,73 @@ def proxy_request(request):
         return JsonResponse({'data': response.text})
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
+
+
+# 걷기
+
+def walklist(request):
+    boardlist = WalkBoard.objects.all().order_by('-pk')
+    return render(request, "walklist.html", {"boardlist": boardlist})
+
+
+def walkcreate(request):
+    print(request.user.pk)
+    if request.method == "POST":
+        board = WalkBoard()
+        board.user = User.objects.get(pk=request.user.pk)
+        board.s_title = request.POST.get("start")
+        board.d_title = request.POST.get("end")
+        board.date = request.POST.get("date")
+        board.people = int(request.POST.get("people")) #몇 명 모집?
+        board.star = False
+        board.content = request.POST.get("content")
+        board.total = int(request.POST.get("total")) #금액
+        board.completion = False
+        board.now_people = 0
+        board.save()
+        board.member.add(request.user) #추가된 멤버
+        chat_room = ChatRoom.objects.create(board=board)
+        chat_room.user_group.add(request.user)
+        return redirect("board:list")
+    return render(request, 'walkkakaomap.html')
+
+
+def walkdetail(request, pk):
+    board = WalkBoard.objects.get(pk=pk)
+    return render(request, "walkdetail.html", {"board":board})
+
+
+def walkupdate(request, pk):
+    board = WalkBoard.objects.get(pk=pk)
+    if request.method == "POST":
+        #board.user = board.user
+        board.s_title = request.POST.get("start")
+        board.d_title = request.POST.get("end")
+        board.date = request.POST.get("date")
+        board.people = request.POST.get("people")
+        board.star = board.star
+        board.content = request.POST.get("content")
+        board.total = request.POST.get("total")
+        completion_value = request.POST.get("completion")
+        #다 구해지면 체크
+        if completion_value == "on":
+            board.completion = True
+        elif completion_value == None:
+            board.completion = False
+        print("Completion value:", request.POST.get("completion"))
+
+        board.now_people = request.POST.get("now_people")
+
+        #현재 구한 사람과 구하려는 사람이 동일하다면 다 구해진 것
+        if board.people == board.now_people and board.completion == False:
+            board.completion = True
+        board.save()
+        return redirect("board:detail", pk)
+    return render(request, "walkupdate.html", {"board": board})
+
+
+def walkdelete(request, pk):
+    board = WalkBoard.objects.get(pk=pk)
+    board.delete()
+    #목록으로 이동
+

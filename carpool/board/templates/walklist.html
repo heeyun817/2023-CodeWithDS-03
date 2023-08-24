@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  {% for board in boardlist %}
+    {% if board.completion == False %}
+      <a href="{% url 'board:detail' board.pk %}">{{ board.s_title }} -
+        {{ board.d_title }} - {{ board.user }}</a>
+      <span class="time">{{ board.create |timesince|cut:", " }} 전</span>
+    {% endif %}
+  {% endfor %}
+</body>
+</html>
