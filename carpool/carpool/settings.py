@@ -51,6 +51,10 @@ INSTALLED_APPS = [
 ]
 AUTH_USER_MODEL = 'accounts.User'
 
+# ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+# ACCOUNT_EMAIL_VARIFICATION = "mandatory"
+# ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "/"
+# ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "{% url 'accounts:signup' %}"
 
 GOOGLE_MAPS_API_KEY = 'AIzaSyAtoiOxIuDVSOiGRLzxiSyshAbW5ymFmGc'
 
@@ -123,8 +127,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'  # duksung.ac.kr의 SMTP 서버 주소
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'hmj6589@gmail.com'  # 보내는 이메일 계정
-EMAIL_HOST_PASSWORD = 'alswl978!!'  # 보내는 이메일 계정의 비밀번호
+EMAIL_HOST_USER = 'kyumin991105@gmail.com'  # 보내는 이메일 계정
+EMAIL_HOST_PASSWORD = 'wjxfxyhxbclqbwhm'  # 보내는 이메일 계정의 비밀번호
 # DEFAULT_FROM_EMAIL = 'your_email@duksung.ac.kr'  # 보내는 이메일 계정
 
 

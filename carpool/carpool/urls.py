@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,6 +28,9 @@ urlpatterns = [
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('chat/', include('channels.urls', namespace='channels')),
     path('mypage/', include('mypage.urls', namespace='mypage')),
+    path("email-confirmation-done/", TemplateView.as_view(template_name="coplate/email-confirmation-done.html"), name="account_email_confirmation_done"),
+    path('', include('allauth.urls')),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
