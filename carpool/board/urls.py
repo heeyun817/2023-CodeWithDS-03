@@ -12,7 +12,7 @@ urlpatterns = [
     path('proxy-request/', views.proxy_request, name='proxy_request'),
     path('update/<int:pk>/', views.update, name="update"),
     path('delete/<int:pk>/', views.delete, name="delete"),
-    path("", views.list, name="list"),
+    path("car/", views.list, name="list"),
     path('walkcreate/', views.walkcreate, name='walkcreate'),
     path('walkcopy/', views.walktaxi, name="walkcopy"),
     path('walkdetail/<int:pk>/', views.walkdetail, name="walkdetail"),
@@ -20,6 +20,7 @@ urlpatterns = [
     path('walkupdate/<int:pk>/', views.walkupdate, name="walkupdate"),
     path('walkdelete/<int:pk>/', views.walkdelete, name="walkdelete"),
     path("walk/", views.walkroad, name="walk"),
-    path("safemap/", views.map_view, name="map_view")
+    path("safemap/", views.map_view, name="map_view"),
+    path("", views.boardmain, name="main")
 
 ]

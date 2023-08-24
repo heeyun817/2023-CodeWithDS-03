@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="favicon.png" />
+    <link rel="stylesheet" href="{% static 'board/made.css' %}">
+    <link rel="stylesheet" href="{% static 'board/main.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />  
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>DukXi</title>
+</head>
+
+<body style="margin:0px">
+    <div id="App">
+        <div id="my-page-nav">
+            <a href="{% url 'board:list' %}">
+                <span class="material-symbols-outlined" id="back">
+                    arrow_back_ios_new
+                </span>
+            </a>
+            <div id="make">카풀 모임 생성</div>
+            <div></div>
+        </div>
+        <div id="new_make">
+            <fieldset style="border: 2px solid #8b2845;"><legend>
+                <h2><div id="t">만남을 위한 정보를 입력해 주세요!</div></h2></legend>
+                <table id="meet">
+                    <tr>
+                        <td>언제</td>
+                        <td><input type="datetime-local" id="datetime"></td>
+                    </tr>
+                    <tr>
+                        <td>출발지</td>
+                        <td><input type="text" name="start">
+                            <span class="material-icons">
+                                place
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>도착지</td>
+                        <td><input type="text" name="end">
+                            <span class="material-icons">
+                                place
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>모집 인원</td>
+                        <td>
+                            <input type="number" name="people" min="1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>총 예상 금액 :</td>
+                        <input type="number" name="total" id="total" value="" min="0">
+                        <td>인당 예상 금액 :</td>
+                        <td id="per-person-amount"></td>
+                    </tr>
+                    <tr>
+                        <td>구하는 글
+                            <input type="text" name="content"></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <div id="b">
+                                <a href="board.html">
+                                    <input id="sub" type="submit" value="모임 생성">
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </div><br>
+        <script>
+            // // 현재 시간을 가져오는 함수
+            // function getCurrentDateTime() {
+            //     const now = new Date();
+            //     const year = now.getFullYear();
+            //     const month = (now.getMonth() + 1).toString().padStart(2, '0');
+            //     const day = now.getDate().toString().padStart(2, '0');
+            //     const hours = now.getHours().toString().padStart(2, '0');
+            //     const minutes = now.getMinutes().toString().padStart(2, '0');
+            //     return `${year}-${month}-${day}T${hours}:${minutes}`;
+            // }
+
+            // // 현재 시간을 가져와 input 요소의 value로 설정
+            // const datetimeInput = document.getElementById('datetime');
+            // datetimeInput.value = getCurrentDateTime();
+        </script>
+        <script>
+            // 예상 금액 계산 함수
+            function calculateEstimatedAmount() {
+                var distance = 2000; // 임의의 거리 값
+                var selectedPeople = parseInt($("#selected-people").val()); // 선택된 인원
+                var totalAmount = 0;
+    
+                // 거리에 따른 예상 금액 계산
+                if (distance <= 1000) {
+                    totalAmount = 5000;
+                } else if (distance > 1000 && distance <= 3000) {
+                    totalAmount = 8000;
+                } else {
+                    totalAmount = 10000;
+                }
+    
+                // 인당 예상 금액 계산
+                var perPersonAmount = totalAmount / selectedPeople;
+    
+                // 결과 표시
+                $("#total-amount").text(totalAmount + "원");
+                $("#per-person-amount").text(perPersonAmount + "원");
+            }
+    
+            // 모집 인원 선택 값이 변경되었을 때 예상 금액 계산
+            $("#selected-people").on("change", calculateEstimatedAmount);
+    
+            // 초기 실행
+            calculateEstimatedAmount();
+        </script> 
+        <footer id="footer">
+            CodeWithDuksung 03
+        </footer>   
+    </div>
+</body>
+
+</html>
