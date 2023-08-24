@@ -15,5 +15,5 @@ urlpatterns = [
     path('home/login/', views.login, name='login'),
     path('home/logout/', views.logout, name='logout'),
     path('home/', views.home, name='home'),
-    #path('profile/<int:pk>/', mypage.views.view_profile, name="profile")
+    # path('send_email/', views.send_mail, name='send_email')
 ]

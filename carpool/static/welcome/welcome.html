@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'welcome/welcome.css' %}">
+    <script src="{% static 'welcome/welcome.css' %}"></script>
+    <title>welcome</title>
+
+</head>
+<body>
+
+    <div class="header">
+        <div class="nav-container">
+            <a href="./home.html">홈</span></a>
+            <a href="./board.html">게시판</a>
+            <a href="./chat.html">채팅방</a>
+            <a href="./myPage.html">마이페이지</a>
+        </div>
+</div>
+
+
+    <div class="last-container">
+        <div class="last-content">
+            <img src="img/dukxi_logo.png" alt="Logo">
+            <h3> <div style="margin-top: 26px;" class="inputTitle"></div>
+                <div class="inputWrap">
+                    <input type="text" id="emailInput" class="textbox"> 님 환영해요!
+                </div>
+                <br> Dukxi를  바로 사용해볼까요?
+            </h3>
+            <div class="button">
+                <button class="complete-button" onclick="use()">사용해보기</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

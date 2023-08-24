@@ -28,6 +28,21 @@ def signup(request):
                 error_message = '덕성여자대학교 이메일 주소를 사용해야 합니다.'
                 return render(request, 'signup.html', {'form': form, 'error': error_message})
 
+            
+            if form.is_valid():
+                # 랜덤 숫자 생성
+                random_number = str(random.randint(1000, 9999))
+
+                # 이메일 보내기
+                send_mail(
+                    'DukXi 이메일 인증 코드',
+                    f'인증 코드: {random_number}',
+                    'hmj6589@gmail.com',  # 보내는 이메일 계정
+                    [email],
+                    fail_silently=False,
+                    )
+                return render(request, 'verify_email.html', {'email': email, 'random_number': random_number})
+
             if password1 == password2:
                 
                 # random_number = str(random.randit(1000, 9999))
@@ -102,6 +117,17 @@ def sendmail(request, pk):
 #             return render(request, 'verify_email.html', {'error': error_message})
 #     else:
 #         return render(request, 'verify_email.html', {'confirmation_code': confirmation_code})
+
+# # 이메일 보내기
+
+# def send_mail(request):
+#     subject = "이메일 인증 코드"
+#     to = [email]
+#     from_email = "hmj6589@naver.com"
+#     message = [random_number]
+#     EmailMessage(subject=subject, body=message, to=to, from_email=from_email).send()
+
+
 
 
 # 이메일 인증 (랜덤 코드 보내서 인증하는 걸로 했습니다.)

@@ -123,9 +123,17 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.gmail.com'  # duksung.ac.kr의 SMTP 서버 주소
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'hmj6589@gmail.com'  # 보내는 이메일 계정
+# EMAIL_HOST_PASSWORD = 'alswl978!!'  # 보내는 이메일 계정의 비밀번호
+# # DEFAULT_FROM_EMAIL = 'your_email@duksung.ac.kr'  # 보내는 이메일 계정
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.naver.com'
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'  # duksung.ac.kr의 SMTP 서버 주소
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'kyumin991105@gmail.com'  # 보내는 이메일 계정
 EMAIL_HOST_PASSWORD = 'wjxfxyhxbclqbwhm'  # 보내는 이메일 계정의 비밀번호
