@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="favicon.png" />
+    <link rel="stylesheet" href="{% static 'board/board.css' %}">
+    <link rel="stylesheet" href="{% static 'board/main.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>DukXi</title>
+</head>
+
+<body style="margin:0px">
+    <div id="App">
+        <div id="my-page-nav">
+            <a href="{% url 'main:home' %}">
+                <span class="material-symbols-outlined" id="back">
+                    arrow_back_ios_new
+                </span>
+            </a>
+            <div id="board">게시판</div>
+            <div></div>
+        </div>
+        <br /><br /><br />
+        <div id="now" style="text-align: left;">
+            <hr />
+            <a href="{% url 'board:list'%}">
+                <p id="car">카풀 게시판</p>
+            </a>
+            <a href="{% url 'board:walklist'%}">
+                <p is="walk">걷기 게시판</p>
+            </a>
+            <hr /><br /><br/>
+        </div>
+        <script>
+            const carbutton = document.getElementById('car');
+
+            carbutton.addEventListener('click', function() {
+                window.location.href = "{% url 'board:list'%}";
+            });
+
+            const walkbutton = document.getElementById('walk');
+
+            walkbutton.addEventListener('click', function() {
+                window.location.href = "{% url 'board:walklist' %}";
+            });
+        </script>
+        <div id="detail">
+            <div id="boardContainer"></div>
+            <script src="{% static 'board/board.js'%}"></script>
+        </div>
+        <br/><br/><br/>
+
+        <a href="{% url 'board:create' %}">
+            <!-- <span class="material-icons" id="plus">
+                add_circle_outline
+            </span> -->
+            +
+        </a>
+        <footer id="footer">
+            CodeWithDuksung 03
+        </footer>
+    </div>
+    <script>
+        const plusButton = document.getElementById('plus');
+        const footer = document.getElementById('footer');
+
+        function handleScroll() {
+            const footerRect = footer.getBoundingClientRect();
+            if (footerRect.top < window.innerHeight) {
+                plusButton.style.display = 'none';
+            } else {
+                plusButton.style.display = 'block';
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll);
+    </script>
+    <script>
+        // board.html 내에서 many 값을 불러 와
+        document.addEventListener("DOMContentLoaded", function() {
+            const storedMany = localStorage.getItem('many');
+            if (storedMany !== null) {
+                const manyElements = document.querySelectorAll('.many');
+                manyElements.forEach(function(element) {
+                    element.innerText = storedMany;
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
