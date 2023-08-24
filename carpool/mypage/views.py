@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User  # User 모델 가져오기
-from .models import UserProfile
 from .forms import UserProfileForm
+from .models import UserProfile
+from board.models import Board
 
-#전화번호, 프로필 사진만 변경 -> 이메일, 이름 변경 x
 @login_required
 def mypage(request):
     user = request.user
@@ -19,7 +19,7 @@ def mypage(request):
 
     return render(request, 'mypage.html', {'user_profile': user_profile})
 
-
+#이름, 전화번호, 프로필 사진만 변경 -> 이메일 변경 x
 @login_required
 def edit_mypage(request):
     user = request.user  # 현재 로그인한 사용자
@@ -37,148 +37,42 @@ def edit_mypage(request):
     return render(request, 'edit_mypage.html',  {'form': form, 'user_profile': user_profile, 'request_user': request.user})
 
 
-
-
-#기존 User모델만 사용 -> 사진 변경 안됨
-# from django.shortcuts import render,redirect
-# from accounts.models import User
-# from django.contrib.auth.decorators import login_required
-# from .forms import UserForm
-#
-# @login_required
-# def mypage(request):
-#     user = request.user
-#     return render(request, 'mypage.html', {'user': user})
-#
-# #이미지만 수정 안됨
-# @login_required
-# def edit_mypage(request):
-#     user = request.user  # 현재 로그인한 사용자
-#     if request.method == 'POST':
-#         # POST 요청을 처리하여 유저 데이터를 업데이트합니다.
-#         user.username = request.POST['username']
-#         user.email = request.POST['email']
-#         # 이미지를 업로드한 경우에만 이미지 필드를 업데이트합니다.
-#         if 'image' in request.FILES:
-#             user.image = request.FILES["image"]
-#
-#         user.save()
-#         return redirect('mypage:mypage')  # 수정 완료 후 마이페이지로 리디렉션
-#
-#     return render(request, 'edit_mypage.html', {'user': user})
+# 사용 기록 (자신이 작성 + 구함 완료까지) -> 추가 버튼 눌러서 하는 것도 구현 해야함
+def completed_boards(request):
+    user = request.user
+    completed_boards = Board.objects.filter(user=user, completion=True)
+    return render(request, 'completed_boards.html', {'completed_boards': completed_boards})
 
 
 
+# 다른 유저 프로필 보기
+def view_profile(request, user_id):
+    # 요청한 사용자의 프로필을 가져옵니다.
+    profile_user = get_object_or_404(User, pk=user_id)
+
+    # UserProfile 모델을 사용하여 사용자의 프로필 정보를 가져옵니다.
+    user_profile = get_object_or_404(UserProfile, user=profile_user)
+
+    context = {
+        'profile_user': profile_user,
+        'user_profile': user_profile,
+    }
+
+    return render(request, 'profile_template.html', context)
+
+
+#<!--게시글 작성자의 프로필로 이동하는 링크--> - board/detail.html에 추가하기
+#<a href="{% url 'mypage:view_profile' board.user.id %}">{{ board.user.username }}</a>
 
 
 
+ # 자신이 작성한 글 보기(혹시 몰라서 한 번 넣어본 기능..)
+def my_record(request):
+    current_user = request.user
+    my_posts = Board.objects.filter(user=current_user, completion=False)
+    # comments = Comment.objects.filter(writer=current_user)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# @login_required
-# def edit_mypage(request):
-#     if request.method == 'POST' and request.FILES['image']:
-#         image = request.FILES['image']
-#         User.objects.create(image=image)
-#         return redirect('mypage:mypage')  # 이미지 업로드 성공 후 이동할 뷰로 리디렉션
-#     return render(request, 'mypage/edit_mypage.html')
-
-# #수정 사항 반영 안됨
-# @login_required
-# def edit_mypage(request):
-#     user = request.user
-#
-#     if request.method == 'POST':
-#         form = UserProfileForm(request.POST, request.FILES, instance=user)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('mypage:mypage')  # 수정 후 마이페이지로 리다이렉트
-#     else:
-#         form = UserProfileForm(instance=user)
-#
-#     return render(request, 'mypage/edit_mypage.html', {'form': form})
-#
-
-
-
-
-
-
-
-
-
-
-
-
-# #수정해야됨 - 편집 기능 안됨
-# @login_required
-# def edit_mypage(request):
-#     user = request.user
-#     if request.method == 'POST':
-#         form = UserProfileForm(request.POST, request.FILES, instance=user)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('mypage:mypage')  # Redirect to the mypage after successful update
-#     else:
-#         form = UserProfileForm(instance=user)
-#
-#     return render(request, 'mypage/edit_mypage.html', {'form': form})
-
-
-# from django.shortcuts import render, redirect
-# from django.contrib.auth.decorators import login_required
-# from accounts.models import UserProfile
-#
-# #프로필 화면
-# @login_required
-# def mypage(request):
-#     profile = UserProfile.objects.get(user=request.user)
-#     return render(request, 'mypage/mypage.html', {'profile': profile})
-#
-# #프로필 수정 - 이미지, bio까지만..
-# @login_required
-# def edit_profile(request):
-#     profile = UserProfile.objects.get(user=request.user)
-#
-#     if request.method == 'POST':
-#         # POST 요청을 처리하여 프로필 업데이트
-#         new_bio = request.POST.get('new_bio')
-#         new_image = request.FILES.get('new_image')
-#
-#         if new_image:
-#             profile.profile_picture = new_image
-#
-#         if new_bio is not None:
-#             profile.bio = new_bio
-#
-#         profile.save()
-#         return redirect('mypage:mypage')
-#
-#     return render(request, 'mypage/edit_mypage.html', {'profile': profile})
-#
-# #사용 기록 - 내가 모집한 글
-# #사용 기록 - 댓글단 글(아니면 채팅창 글)
+    return render(request, 'my_record.html', {
+        'my_posts': my_posts,
+        # 'comments': comments
+    })

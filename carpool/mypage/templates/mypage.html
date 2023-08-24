@@ -17,5 +17,6 @@
     <a href="{% url 'mypage:edit_mypage' %}">프로필 수정</a>
     <p>전화번호: {{ user_profile.phone_number }}</p>
     <p>가입 일자: {{ user_profile.signup_date }}</p>
+    <a href="{% url 'mypage:completed_boards' %}">사용 기록 보기</a>
 </body>
 </html>

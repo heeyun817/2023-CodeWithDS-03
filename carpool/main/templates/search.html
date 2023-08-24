@@ -9,8 +9,8 @@
     <form method="GET" action="{% url 'main:search_result' %}">
         <input type="text" name="search_text" placeholder="검색어 입력">
         <br>
-        <input type="radio" name="search_type" value="s_title" checked> 출발지 검색
-        <input type="radio" name="search_type" value="d_title"> 도착지 검색
+        <input type="radio" name="search_type" value="s_title" checked> 덕대로 도착
+        <input type="radio" name="search_type" value="d_title"> 덕대에서 출발
         <br>
         <button type="submit">검색</button>
         <br>
@@ -22,6 +22,7 @@
 
 <button onclick="redirectToBoard()">직접 찾아보기</button><br>
 <button onclick="createNewPost()">함께 할 멤버 직접 모아보기</button>
+<br>
 
 <script>
     function redirectToBoard() {
