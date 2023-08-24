@@ -32,7 +32,7 @@ class Board(models.Model):
 
 
 class WalkBoard(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="walkuser")
     s_title = models.CharField(max_length=20)
     #출발지
     d_title = models.CharField(max_length=20)

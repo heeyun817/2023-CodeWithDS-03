@@ -1,0 +1,5 @@
+<div id="chat-box">
+  {% for message in messages %}
+  <p>{{ message.sender.username }}: {{ message.message }} ({{ message.timestamp }})</p>
+  {% endfor %}
+</div>
