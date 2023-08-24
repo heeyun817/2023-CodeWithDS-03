@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div id="chat-box">
+  {% if messages == None %}
+  채팅을 남겨보세요
+  {% else %}
+    {% for message in messages %}
+    <p>{{ message.sender.username }}: {{ message.message }} ({{ message.timestamp }})</p>
+    {% endfor %}
+  {% endif %}
+</div>
+<form id="chat-form">
+    <div id="user-id" data-user-id="{{ request.user.id }}"></div>
+    {% csrf_token %}
+    <input type="text" id="message-input" placeholder="Type your message">
+    <button type="submit" id="send-button">Send</button>
+</form>
+
+<button type="submit" id="join">함께하기 결정</button>
+
+<script>
+      $(document).ready(function() {
+        // Get CSRF token
+        var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+
+    document.getElementById("join").addEventListener("click", function() {
+      // AJAX 요청 보내기
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "{% url 'channels:update_people_count' chatroom.pk %}", true);
+      //xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.setRequestHeader("X-CSRFToken", csrftoken);
+      xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              console.log("People count updated successfully");
+          }
+      };
+
+      xhr.send("board_id={{ board.id }}");  // board.id 대신 실제 board의 ID 값을 전달해야 함
+  });
+
+
+        function fetchMessages() {
+            $.ajax({
+                url: "{% url 'channels:get_messages' chatroom.pk %}",  // Change this URL to the endpoint that fetches messages
+                success: function(data) {
+                    $("#chat-box").html(data);
+                }
+            });
+        }
+
+        $("#chat-form").submit(function(e) {
+            e.preventDefault();
+            var message = $("#message-input").val();
+            var userId = $("#user-id").data("user-id");
+            $.ajax({
+                method: "POST",
+                url:"{% url 'channels:send_message' chatroom.pk %}",
+                headers: { "X-CSRFToken": csrftoken },
+                data: { message: message,  user: userId },
+                success: function() {
+                    $("#message-input").val("");
+                    fetchMessages();  // Fetch messages after sending
+                }
+            });
+        });
+
+        setInterval(fetchMessages, 1000);  // Fetch messages every 1 seconds
+    });
+</script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 from django.contrib import admin
-from board.models import Board
-
+from .models import Board, WalkBoard
 
 admin.site.register(Board)
+
+admin.site.register(WalkBoard)

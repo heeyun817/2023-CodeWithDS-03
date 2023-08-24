@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>다음 지도 API</title>
+</head>
+<body>
+	<div id="map" style="width:750px;height:350px;"></div>
+
+	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b0f2580ce945daf279b051132dda23e"></script>
+
+    <script>
+        import axios from 'axios'
+        export default {
+            data() {
+                return {
+                    options: {
+                        center: new kakao.maps.LatLng(37.39843974939604, 127.10972941510465),
+                        level: 13
+                    },
+                    map: null
+                }
+            },
+            mounted() {
+                const container = this.$refs.map;
+                let _map = new kakao.maps.Map(container, this.options);
+                this.map = _map;
+
+                kakao.maps.event.addListener(_map, 'click', function(mouseEvent) {
+                    console.log(mouseEvent.latLng);
+                });
+
+                setTimeout(() => {
+
+                    axios.get('/api?origin=127.11409769110776,37.99269184820678&destination=126.62974669101217,37.39996530012616&waypoints=&priority=RECOMMEND&car_fuel=GASOLINE&car_hipass=false&alternatives=false&road_details=false', {
+                        headers : {
+                            'Authorization' :'KakaoAK 키값',
+                            'Content-Type'  : 'application/json'
+                        }
+                    })
+                    .then(arg => {
+                        let {result_code, summary, sections} = arg?.data?.routes[0];
+                        console.log(arg)
+                        if(sections[0]){
+                            let {distance, duration, guides : arrays, roads} = sections[0];  //distance : 미터단위, duration : 초 단위
+
+                            let detailRoads = [];
+
+                            for(let i=0;i < roads.length;i++){
+                                let arg = roads[i];
+                                let mini = arg.vertexes;
+                                let cursor = 0;
+                                while(cursor < mini.length){
+                                    let obj = new kakao.maps.LatLng(mini[cursor+1], mini[cursor]);
+                                    detailRoads.push(obj);
+                                    cursor = cursor + 2;
+                                    if(cursor >= 1000000) break;
+                                }
+                            }
+                            arrays = arrays.map( (arg, idx)=>{
+                                let{x, y}  = arg;
+                                if(x && y){
+                                    arg.position = new kakao.maps.LatLng(arg.y, arg.x);
+                                }
+                                return arg;
+                            });
+
+                            let { title, position} = arrays[0];
+                            // 마커 이미지의 이미지 크기 입니다
+                            let imageSize = new kakao.maps.Size(24, 35);
+                            // 마커 이미지를 생성합니다
+                            let image = new kakao.maps.MarkerImage('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png', imageSize);
+                            // 마커를 생성합니다
+                            let marker1 = new kakao.maps.Marker({
+                                map: _map, // 마커를 표시할 지도
+                                position,
+                                title: title? title : '', // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                                image // 마커 이미지
+                            });
+
+                            let {title : title2, position : position2} = arrays[arrays.length-1];
+                            // 마커 이미지의 이미지 크기 입니다
+                            // 마커 이미지를 생성합니다
+                            let image2 = new kakao.maps.MarkerImage('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_drag.png', imageSize);
+                            // 마커를 생성합니다
+                            let marker2 = new kakao.maps.Marker({
+                                map: _map, // 마커를 표시할 지도
+                                position : position2,
+                                title: title2? title2 : '', // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                                image : image2 // 마커 이미지
+                            });
+
+                            // 지도에 표시할 선을 생성합니다
+                            let polyline = new kakao.maps.Polyline({
+                                //path: arrays.map( arg=> arg.position), // 선을 구성하는 좌표배열 입니다
+                                path : detailRoads,
+                                strokeWeight: 5, // 선의 두께 입니다
+                                strokeColor: 'red', // 선의 색깔입니다
+                                strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+                                strokeStyle: 'solid' // 선의 스타일입니다
+                            });
+
+                            // 지도에 선을 표시합니다
+                            polyline.setMap(_map);
+
+                            let customOverlay = new kakao.maps.CustomOverlay({
+                                position: new kakao.maps.LatLng(37.39843974939604, 127.10972941510465),
+                                content: `<div class ="label">거리, 시간 : ${distance}, ${duration}</div>`
+                            });
+
+                            // 커스텀 오버레이를 지도에 표시합니다
+                            customOverlay.setMap(_map);
+
+                            //지우는 방법
+                            // setTimeout(() => {
+                            //     polyline.setMap(null);
+                            //     customOverlay.setMap(null);
+                            //     marker1.setMap(null);
+                            //     marker2.setMap(null);
+                            // }, 3000);
+                        }
+                    }).catch(err => {
+                        console.log(err)
+                    });
+                }, 3000);
+            }
+        }
+        </script>
+
+        <template>
+            <div id="map" ref="map"></div>
+        </template>
+        <style>
+        #map {
+            width: 100%;
+            height: 750px;
+            border: 1px solid gray;
+        }
+        .label{
+            padding: 1rem;
+            background : white;
+            border: 1px solid blue;
+        }
+        </style>
+</body>
+</html>
