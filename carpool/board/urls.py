@@ -19,5 +19,7 @@ urlpatterns = [
     path("walk", views.walklist, name="walklist"),
     path('update/<int:pk>/', views.walkupdate, name="walkupdate"),
     path('delete/<int:pk>/', views.walkdelete, name="walkdelete"),
+    path("walk/", views.walkroad, name="walk"),
+    path("safemap/", views.map_view, name="map_view")
 
 ]

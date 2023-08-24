@@ -123,6 +123,7 @@ def proxy_request(request):
         return JsonResponse({'error': str(e)}, status=500)
 
 
+
 # 걷기
 
 def walklist(request):
@@ -190,4 +191,10 @@ def walkdelete(request, pk):
     board = WalkBoard.objects.get(pk=pk)
     board.delete()
     #목록으로 이동
+
+def walkroad(request):
+    return render(request, "walkroad.html")
+
+def map_view(request):
+    return render(request, 'safemap.html')
 
