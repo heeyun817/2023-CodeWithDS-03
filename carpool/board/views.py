@@ -205,3 +205,5 @@ def map_view(request):
 def walktaxi(request):
     return render(request, "walkcopy.html")
 
+def boardmain(request):
+    return render(request, "board.html")
