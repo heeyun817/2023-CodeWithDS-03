@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./signup.css">
+    <script src="signup.js"></script>
+
+    <title>회원가입 페이지</title>
+
+</head>
+
+
+
+    <body style = "margin:0px">
+        <div class="page-wrap">
+        <div class="header">
+            <div>
+                <a href="./home.html">홈</a>
+                <a href="./board.html">게시판</a>
+                <a href="./chat.html">채팅방</a>
+                <a href="./myPage.html">마이페이지</a>
+            </div>
+        <!-- n -->
+        </div>
+
+
+        <div class="page">
+            <div class="title">
+                회원가입
+            </div>
+    
+            <div class="contentWrap">
+                <div class="inputTitle">이름</div>
+                <div class="inputWrap">
+                    <input type="text" id="nameInput" class="input" placeholder="이름을 입력해 주세요.">
+                </div>
+    
+                <div style="margin-top: 13px;" class="inputTitle">아이디</div>
+                <div class="inputWrap">
+                    <input type="text" id="idInput" class="input" placeholder="아이디를 입력해 주세요.">
+                </div>
+    
+                <div style="margin-top: 13px;" class="inputTitle">비밀번호</div>
+                <div class="inputWrap">
+                    <input type="password" id="passwordInput" class="input" placeholder="비밀번호를 입력해 주세요.">
+                </div>
+    
+                <div style="margin-top: 13px;" class="inputTitle">비밀번호 확인</div>
+                <div class="inputWrap">
+                    <input type="password" id="confirmPasswordInput" class="input" placeholder="비밀번호를 다시 입력해 주세요.">
+                </div>
+    
+                <div class="signUp">
+                    <button id="signUpButton" class="bottomButton" disabled onclick="completeSignUp()">가입하기</button>
+                </div>
+            </div>
+        </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Page</title>
+    <link rel="stylesheet" href="chat.css">
+    <script src="chat.js"></script>
+
+    
+</head>
+
+<body style = "margin:0px">
+    <div class="header">
+        <div>
+            <a href="./home.html">홈</a>
+            <a href="./board.html">게시판</a>
+            <a href="./chat.html">채팅방</a>
+            <a href="./myPage.html">마이페이지</a>
+        </div>
+    <!-- n -->
+    </div>
+
+    <div class="chat-container">
+        <div class="chat-box">
+            <div class="chat-header">
+                <h2>채팅방</h2>
+            </div>
+            <div class="chat-content">
+                <div class="message">
+                    <div class="profile">
+                        <img src="img/dukxi_logo.png" width="50px" height="50px" alt="Profile">
+                    </div>
+                    <div class="text">
+                        <p><strong>덕새:</strong> 혹시 어디계세요?</p>
+                    </div>
+                </div>
+                 <!-- <div class="message">
+                    <div class="profile">
+                        <img src="img/dukxi_logo.png" width="70px" height="70px" alt="Profile">
+                    </div>
+                     <div class="text">
+                        <p><strong>덕씨:</strong> 저 덕성여대 아마스빈 앞에 있어요!</p>
+                    </div> -->
+            
+            </div>
+            <div class="chat-input" style="margin:auto; max-width:800px;">
+                <input id="messageInput" type="text" placeholder="메시지를 입력하세요">
+                <button onclick="sendMessage()">전송</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+</html>

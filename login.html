@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./login.css">
+    <script src="login.js"></script>
+
+    <title>Login Page</title>
+</head>
+<body style = "margin:0px">
+
+    <body style = "margin:0px">
+        <div class="header">
+            <div>
+                <a href="./home.html">홈</a>
+                <a href="./board.html">게시판</a>
+                <a href="./chat.html">채팅방</a>
+                <a href="./myPage.html">마이페이지</a>
+            </div>
+        <!-- n -->
+        </div>
+        
+        <div class="page">
+            <div class="loginText">
+                로그인
+            </div>
+            <div class="contentWrap">
+                <div class="inputTitle">아이디</div>
+                <div class="inputWrap">
+                    <input type="text" id="idInput" class="input" placeholder="">
+                </div>
+    
+                <div style="margin-top: 26px;" class="inputTitle">비밀번호</div>
+                <div class="inputWrap">
+                    <input type="password" id="passwordInput" class="input" placeholder="영문,숫자,특수문자 포함 8자 이상">
+                </div>
+    
+                <div style="margin-top: 20px;" class="membership">
+                    아직 Dukxi회원이 아니신가요?
+                    <button style="margin-left: 6px;" class="membershipButton" onclick="goToSignUp()">지금 가입하기</button>
+                    <script>
+                        function goToSignUp() {
+                            window.location.href = "email.html";
+                        }
+                    </script>
+                </div>
+                <div>
+                    <div name="login">
+                    <button id="loginButton" class="bottomButton" disabled onclick="welcome()">
+                        확인
+                    </button>
+                </div>
+                </div>
+            </div>
+        </div>
+        <footer id="footer"></footer>
+    </body>
+
+    
+    </html>
