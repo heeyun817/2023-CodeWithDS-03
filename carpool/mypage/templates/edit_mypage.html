@@ -26,16 +26,16 @@
         <table id='table'>
             <tbody id="profile">
               <td>
-                <img id="profile-img" src="{% static favicon.png %}" alt="Profile" />
+                <img id="profile-img" src="{% static 'image/image.png' %}" alt="Profile" />
               </td>
               <td>
                 <div id='profilelist'>
                   <li style="text-align: left;">
-                    <div id="profile-name">안녕하세요, <span id="new-name">ㅎㅇ</span> 님!</div>
+                    <div id="profile-name">안녕하세요, <span id="new-name">{{ name }}</span> 님!</div>
                   </li> <br/>
                   <li>
                     <div style="text-align: left;">
-                        <span id="profile-email"><span id="new-email">kim@naver.com</span></span>
+                        <span id="profile-email"><span id="new-email">{{ email }}</span></span>
                     </div>
                   </li><br/>
                 </div>
