@@ -14,11 +14,11 @@ urlpatterns = [
     path('delete/<int:pk>/', views.delete, name="delete"),
     path("", views.list, name="list"),
     path('walkcreate/', views.walkcreate, name='walkcreate'),
-    # path('walkcopy/', views.walktaxi, name="walkcopy"),
+    path('walkcopy/', views.walktaxi, name="walkcopy"),
     path('walkdetail/<int:pk>/', views.walkdetail, name="walkdetail"),
     path("walk", views.walklist, name="walklist"),
-    path('update/<int:pk>/', views.walkupdate, name="walkupdate"),
-    path('delete/<int:pk>/', views.walkdelete, name="walkdelete"),
+    path('walkupdate/<int:pk>/', views.walkupdate, name="walkupdate"),
+    path('walkdelete/<int:pk>/', views.walkdelete, name="walkdelete"),
     path("walk/", views.walkroad, name="walk"),
     path("safemap/", views.map_view, name="map_view")
 

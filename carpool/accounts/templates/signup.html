@@ -40,7 +40,7 @@
 </head>
 <body>
     <h1>회원가입</h1>
-    <form method="POST" id="signup-form" action="{% url 'accounts:signup' %}" onsubmit="return validateForm();">
+    <form method="POST" id="signup-form"  onsubmit="return validateForm();">
         {% csrf_token %}
         
         <div>
@@ -54,8 +54,6 @@
             <p id="email-error" style="color: red;"></p>
         </div>
 
-        <a href="{% url 'accounts:verify_email' %}">인증하기</a>
-        
         <div>
             <label for="{{ form.password1.id_for_label }}">Password:</label>
             {{ form.password1 }}

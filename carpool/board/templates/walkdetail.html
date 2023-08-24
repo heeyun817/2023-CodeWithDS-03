@@ -7,8 +7,8 @@
 </head>
 <body>
   {% if request.user == board.user %}
-  <a href="{% url 'board:update' board.pk %}">수정</a>
-  <a href="{% url 'board:delete' board.pk %}">삭제</a>
+  <a href="{% url 'board:walkupdate' board.pk %}">수정</a>
+  <a href="{% url 'board:walkdelete' board.pk %}">삭제</a>
   {% endif %}
   <p>{{board.s_title}}</p>
   <p>{{board.d_title}}</p>
@@ -16,7 +16,7 @@
   <p>현재 몇 명{{board.now_people}}</p>
 
 
-  <a href="{% url 'channels:create_chat_room' board.pk %}">채팅방 입장하기</a>
+  <a href="{% url 'channels:walkcreate_chat_room' board.pk %}">채팅방 입장하기</a>
 
 
 

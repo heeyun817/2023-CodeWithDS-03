@@ -2,12 +2,12 @@
 # from django.contrib.auth import login as auth_login
 from django.shortcuts import render, redirect
 #from django.contrib.auth.models import User
-from .models import User
+from .models import User, Code
 from .forms import CustomUserCreationForm
 from django.contrib import auth
 
 import random
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 
 def signup(request):
     if request.method == 'POST':
@@ -21,38 +21,27 @@ def signup(request):
             email = form.cleaned_data['email']
             password1 = form.cleaned_data['password1']
             password2 = form.cleaned_data['password2']
-                
+            print(email)
+
             # 이메일 주소 검사: @duksung.ac.kr 도메인 확인
             if not email.endswith('@duksung.ac.kr'):
                 error_message = '덕성여자대학교 이메일 주소를 사용해야 합니다.'
                 return render(request, 'signup.html', {'form': form, 'error': error_message})
 
-            # 랜덤 숫자 생성
-            random_number = str(random.randint(1000, 9999))
+            
+            if form.is_valid():
+                # 랜덤 숫자 생성
+                random_number = str(random.randint(1000, 9999))
 
-            # 이메일 보내기
-            subject = 'DukXi 이메일 인증 코드'
-            message = f'인증 코드: {random_number}'
-            from_email = 'hmj6589@naver.com'  # 보내는 이메일 계정 입력
-            recipient_list = [email]  # 받는 사람 이메일 주소
-
-            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
-
-            return render(request, 'verify_email.html', {'email': email, 'random_number': random_number})
-
-            # if form.is_valid():
-            #     # 랜덤 숫자 생성
-            #     random_number = str(random.randint(1000, 9999))
-
-            #     # 이메일 보내기
-            #     send_mail(
-            #         'DukXi 이메일 인증 코드',
-            #         f'인증 코드: {random_number}',
-            #         'hmj6589@gmail.com',  # 보내는 이메일 계정
-            #         [email],
-            #         fail_silently=False,
-            #         )
-            #     return render(request, 'verify_email.html', {'email': email, 'random_number': random_number})
+                # 이메일 보내기
+                send_mail(
+                    'DukXi 이메일 인증 코드',
+                    f'인증 코드: {random_number}',
+                    'hmj6589@gmail.com',  # 보내는 이메일 계정
+                    [email],
+                    fail_silently=False,
+                    )
+                return render(request, 'verify_email.html', {'email': email, 'random_number': random_number})
 
             if password1 == password2:
                 
@@ -71,11 +60,20 @@ def signup(request):
                 #     return render(request, 'verify_email.html', {'form': form, 'error': error_message})
 
                 # 회원가입 정보 생성
-                user = User.objects.create_user(username=username, password=password1)
+                user = User()
+                #user = User.objects.create(username=username, email=email, password=password1)
+                user.password = password1
+                user.username = username
+                user.email = email
+                user.save()
                 # user.save()
-                user = form.save()
-
-                return redirect('accounts:home')  # 로그인 이후 페이지로 이동
+                code = str(random.randint(1000, 9999))
+                print(code)
+                code_user = Code.objects.create(user=user, code=code)
+                code_user.save()
+                print("저장완료")
+                #sendmail(request, user.pk)
+                return redirect('accounts:verify_email', pk=user.pk)  # 로그인 이후 페이지로 이동
             else:
                 error_message = '비밀번호가 일치하지 않습니다.'
                 return render(request, 'signup.html', {'form': form, 'error': error_message})
@@ -85,6 +83,26 @@ def signup(request):
     else:
         form = CustomUserCreationForm()
         return render(request, 'signup.html', {'form': form})
+
+def sendmail(request, pk):
+    user = User.objects.get(pk=pk)
+    code_user = Code.objects.get(user_id=pk)
+    email = EmailMessage(subject="DukXi 이메일 인증 코드", body=f'인증 코드: {code_user.code}', from_email='kyumin991105@gmail.com', to=[user.email])
+    email.send()
+    # send_mail(
+    #             'DukXi 이메일 인증 코드',
+    #             f'인증 코드: {code_user.code}',
+    #             'kyumin991105@gmail.com',
+    #             [user.email],
+    #             fail_silently=False,
+    #         )
+    if request.method == "POST":
+        return render(request, "verify_email1.html")
+
+    return render(request, "verify_email1.html")
+
+
+
 
 # # 이메일 인증
 # def verify_email(request, confirmation_code):
