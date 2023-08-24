@@ -8,6 +8,7 @@ from carpool import settings
 from board.models import Board
 #from django.contrib.auth.models import User
 from accounts.models import User
+from channels.models import ChatRoom
 import requests
 
 #def home(request):
@@ -44,14 +45,16 @@ def create(request):
         board.s_title = request.POST.get("start")
         board.d_title = request.POST.get("end")
         board.date = request.POST.get("date")
-        board.people = request.POST.get("people")
+        board.people = int(request.POST.get("people")) #몇 명 모집?
         board.star = False
         board.content = request.POST.get("content")
-        board.total = request.POST.get("total")
+        board.total = int(request.POST.get("total")) #금액
         board.completion = False
         board.now_people = 0
         board.save()
-        board.member.set(None)
+        board.member.add(request.user) #추가된 멤버
+        chat_room = ChatRoom.objects.create(board=board)
+        chat_room.user_group.add(request.user)
         return redirect("board:list")
     return render(request, 'kakaomap.html')
 
