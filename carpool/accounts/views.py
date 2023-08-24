@@ -49,7 +49,7 @@ def login(request):
         user = auth.authenticate(request, username=username, password=password)
         if user is not None:
             auth.login(request, user)
-            return redirect('') # 그 다음 어딘가로..
+            return redirect('accounts:home') # 그 다음 어딘가로..
         else:
             return render(request, 'login.html', {'error': 'username or password is incorrect.'})
     else:
