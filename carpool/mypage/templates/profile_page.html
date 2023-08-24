@@ -11,7 +11,7 @@
     <p>이메일: {{ profile_user.email }}</p>
 
     {% if user_profile %}
-        <p>전화번호: {{ user_profile.phone_number }}</p>
+<!--        <p>전화번호: {{ user_profile.phone_number }}</p>-->
         <!-- 이미지 표시 -->
         {% if user_profile.image %}
         <img src="{{ user_profile.image.url }}" alt="프로필 이미지">
@@ -21,6 +21,6 @@
     {% endif %}
 
 
-    <p>가입일: {{ user_profile.signup_date }}</p>
+<!--    <p>가입일: {{ user_profile.signup_date }}</p>-->
 </body>
 </html>
