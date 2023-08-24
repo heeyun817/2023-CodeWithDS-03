@@ -7,30 +7,41 @@
 <body>
 <h1>게시판 검색</h1>
     <form method="GET" action="{% url 'main:search_result' %}">
-        <input type="text" name="search_text" placeholder="검색어 입력">
-        <br>
-        <input type="radio" name="search_type" value="s_title" checked> 덕대로 도착
-        <input type="radio" name="search_type" value="d_title"> 덕대에서 출발
-        <br>
-        <button type="submit">검색</button>
-        <br>
-        <button type="submit" name="search_text" value="수유역">수유역</button>
-        <button type="submit" name="search_text" value="서울역">서울역</button>
-        <button type="submit" name="search_text" value="덕성여대 정문">덕성여대 정문</button>
-        <button type="submit" name="search_text" value="덕성여대 후문">덕성여대 후문</button>
-    </form>
+    <input type="text" name="search_text" placeholder="검색어 입력">
+    <br>
+    <input type="radio" name="search_type" value="s_title" checked> 덕대로 도착
+    <input type="radio" name="search_type" value="d_title"> 덕대에서 출발
+    <br>
+    <input type="radio" name="transport_type" value="taxi" checked> 택시 선택
+    <input type="radio" name="transport_type" value="walk"> 걷기 선택
+    <br>
+    <button type="submit">검색</button>
+    <br>
+    <button type="submit" name="search_text" value="수유역">수유역</button>
+    <button type="submit" name="search_text" value="서울역">서울역</button>
+    <button type="submit" name="search_text" value="덕성여대">덕성여대 정문</button>
+    <button type="submit" name="search_text" value="덕성여대 후문">덕성여대 후문</button>
+</form>
 
-<button onclick="redirectToBoard()">직접 찾아보기</button><br>
-<button onclick="createNewPost()">함께 할 멤버 직접 모아보기</button>
+<button onclick="redirectToBoard()">택시 직접 찾아보기</button><br>
+<button onclick="walkredirectToBoard()">걷기 직접 찾아보기</button><br>
+<button onclick="createNewPost()">함께 택시 탈 멤버 직접 모아보기</button>
+<button onclick="walkcreateNewPost()">함께 걸을 멤버 직접 모아보기</button>
 <br>
 
 <script>
+function walkredirectToBoard() {
+        window.location.href = "{% url 'board:walklist' %}";
+    }
     function redirectToBoard() {
         window.location.href = "{% url 'board:list' %}";
     }
 
     function createNewPost() {
         window.location.href = "{% url 'board:create' %}";
+    }
+    function walkcreateNewPost() {
+        window.location.href = "{% url 'board:walkcreate' %}";
     }
 </script>
 

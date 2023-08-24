@@ -2,11 +2,10 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 #import googlemaps
 from carpool import settings
 from board.models import Board
-#from board.models import WalkBoard
 #from django.contrib.auth.models import User
 from accounts.models import User
 from channels.models import ChatRoom
@@ -122,8 +121,8 @@ def proxy_request(request):
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
 
-
-
+from .models import WalkBoard
+from channels.models import WalkChatRoom
 # 걷기
 
 def walklist(request):
@@ -142,15 +141,14 @@ def walkcreate(request):
         board.people = int(request.POST.get("people")) #몇 명 모집?
         board.star = False
         board.content = request.POST.get("content")
-        board.total = int(request.POST.get("total")) #금액
         board.completion = False
         board.now_people = 0
         board.save()
         board.member.add(request.user) #추가된 멤버
-        chat_room = ChatRoom.objects.create(board=board)
+        chat_room = WalkChatRoom.objects.create(board=board)
         chat_room.user_group.add(request.user)
-        return redirect("board:list")
-    return render(request, 'walkkakaomap.html')
+        return redirect("board:walklist")
+    return render(request, 'safemap.html')
 
 
 def walkdetail(request, pk):
@@ -183,13 +181,18 @@ def walkupdate(request, pk):
         if board.people == board.now_people and board.completion == False:
             board.completion = True
         board.save()
-        return redirect("board:detail", pk)
+        return redirect("board:walkdetail", pk)
     return render(request, "walkupdate.html", {"board": board})
 
 
 def walkdelete(request, pk):
-    board = WalkBoard.objects.get(pk=pk)
-    board.delete()
+    try:
+        board = WalkBoard.objects.get(pk=pk)
+        board.delete()
+        return redirect("board:walklist")  # 삭제 후에 어디로 리디렉션할지 설정하세요.
+    except WalkBoard.DoesNotExist:
+        # 해당 객체가 없을 경우 예외 처리
+        return HttpResponse("Object not found", status=404)
     #목록으로 이동
 
 def walkroad(request):
@@ -197,4 +200,7 @@ def walkroad(request):
 
 def map_view(request):
     return render(request, 'safemap.html')
+
+def walktaxi(request):
+    return render(request, "walkcopy.html")
 
