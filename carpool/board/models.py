@@ -53,5 +53,5 @@ class WalkBoard(models.Model):
     member = models.ManyToManyField(User)
 
 
-    def __str__(self):
-        return f'{self.s_title} - {self.d_title}'
+#     def __str__(self):
+#         return f'{self.s_title} - {self.d_title}'
