@@ -120,3 +120,10 @@ def proxy_request(request):
         return JsonResponse({'data': response.text})
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
+
+
+def walkroad(request):
+    return render(request, "walkroad.html")
+
+def map_view(request):
+    return render(request, 'safemap.html')
