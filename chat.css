@@ -13,6 +13,12 @@
     text-align: center;
 }    
 
+.nav-container {
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+    max-width: 800px;
+}
 /* .click-text{
     text-decoration: none;
     color: white;
@@ -40,19 +46,27 @@
     height: 80vh;
 }
 
+.nav-container {
+    width: 90%;
+    max-width: 800px;
+}
+
 .chat-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    height: 90vh;
 }
 
 .chat-box {
     width: 80%; /* 채팅 박스의 너비 조절 */
+    height: 60vh;
+    max-width: 800px;
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
 }
 
 .chat-header {
@@ -64,7 +78,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
-    max-height: 300px;
+    max-height: calc(100vh - 200px);
     overflow-y: auto;
     margin-bottom: 10px;
     display: flex;
@@ -73,19 +87,19 @@
 
 .chat-input {
     position: fixed;
-    bottom: 0;
-    left:0;
+    bottom: 0%; /* 화면의 중앙으로 변경 */
+    left: 50%; 
+    transform: translate(-50%, -50%);
     width: 100%;
     background-color: #f2f2f2;
     padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0px -2px 4px rgba(150, 145, 145, 0.1);
 }
 
 .chat-input input[type="text"] {
-    flex: 1;
+    flex-grow: 1;
     padding: 8px;
     border: none;
     border-radius: 5px;
@@ -142,3 +156,27 @@
     background-color: #f2f2f2;
     border-radius: 10px;
 }
+
+@media screen and (min-width: 768px) {
+    .chat-box {
+        width: 70%; /* Adjust width for tablets */
+    }
+}
+
+/* New styles for larger screens (min-width: 1040px) */
+@media screen and (min-width: 1040px) {
+    .chat-box {
+        width: 50%; /* Adjust width for larger screens */
+    }
+}
+
+@media screen and (min-width: 1040px) {
+    .header {
+        justify-content: center;
+    }
+
+    .nav-container {
+        width: 80%;
+    }
+}
+

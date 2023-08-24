@@ -8,12 +8,11 @@
 
     <div class="header">
         <div>
-            <a href="home.html"><span class="click-text">Home</span></a>
-            <a href="board.html">Board</a>
-            <a href="chat.html">Chat</a>
-            <a href="myPage.html">My Page</a>
+            <a href="./home.html"><span class="click-text">Home</span></a>
+            <a href="./board.html">Board</a>
+            <a href="./chat.html">Chat</a>
+            <a href="./myPage.html">My Page</a>
         </div>
-    <a href="#" class="logout">Logout</a>
 </div>
 
 </head>
@@ -23,15 +22,13 @@
             <div class="search-box">
                 <h3><span class="red-text">Dukxi</span>와 함께 어디로 가볼까요?</h3>
                 
-                <div class="radio-box">
-                    <input type="radio" name="location" id="startLocation" value="start">
-                    <label for="startLocation">덕대에서 출발</label>
-                    
-                    <input type="radio" name="location" id="endLocation" value="end">
-                    <label for="endLocation">덕대로 도착</label>
-                </div>
-    
                 <div class="search-input">
+                    <select id="location-select" name="location">
+                        <option value="">선택하세요</option>
+                        <option value="start">덕대에서 출발</option>
+                        <option value="end">덕대로 도착</option>
+                    </select>
+    
                     <input type="text" placeholder="출발지, 도착지 검색하기">
                     <img src="img/search_icon.png" alt="Search Icon" class="icon">
                 </div>

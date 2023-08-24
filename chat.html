@@ -6,17 +6,19 @@
     <title>Chat Page</title>
     <link rel="stylesheet" href="chat.css">
     <script src="chat.js"></script>
+
+    
 </head>
 
 <body style = "margin:0px">
     <div class="header">
         <div>
-            <a href="home.html">Home</a>
-            <a href="board.html">Board</a>
-            <a href="chat.html">Chat</a>
-            <a href="myPage.html">My Page</a>
+            <a href="./home.html">Home</a>
+            <a href="./board.html">Board</a>
+            <a href="./chat.html">Chat</a>
+            <a href="./myPage.html">My Page</a>
         </div>
-    <a href="#" class="logout">Logout</a>
+    <!-- n -->
     </div>
 
     <div class="chat-container">
@@ -42,11 +44,13 @@
                     </div>
             
             </div>
-            <div class="chat-input">
+            <div class="chat-input" style="margin:auto; max-width:800px;">
                 <input id="messageInput" type="text" placeholder="메시지를 입력하세요">
                 <button onclick="sendMessage()">전송</button>
             </div>
         </div>
     </div>
 </body>
+
+
 </html>

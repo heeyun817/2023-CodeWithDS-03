@@ -11,6 +11,41 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    margin-top: 100px;
+}
+.nav-container {
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+    max-width: 800px;
+}
+
+.header{
+    background:#8b2845;
+    width: 100%;
+    display: flex;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-weight: 700;
+    font-size: 20px;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    color: white;
+    text-align: center;
+} 
+
+.header a {
+    text-decoration: none;
+    color: white;
+    margin: 0 15px;
+}
+
+.header a:hover{
+    text-decoration: none;
+    color: white;
+    margin: 0 15px;
+    color: #503838;
 }
 
 .logoAndTextWrap {
@@ -18,7 +53,8 @@
     height: auto;
     display: flex;
     text-align: center;
-    margin-top: 0px;
+    margin-top: 50px;
+    top: 50%;
 }
 
 .logoWrap img {
@@ -116,3 +152,10 @@
     font-weight: 550;
     color: #262626;
 }
+
+#footer{
+    padding: 50px;
+    width: 100%;
+    background-color: #747476a8;
+    display: flex;
+  }

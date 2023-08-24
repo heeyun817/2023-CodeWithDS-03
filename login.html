@@ -10,49 +10,50 @@
     <title>Login Page</title>
 </head>
 <body style = "margin:0px">
-    <div class="page">
-        <div class="header-content">
-            <div class="logoAndTextWrap">
-                <div class="logoWrap">
-                    <img src="img/dukxi_logo.png" alt="logo">
-                </div>
-                <div class="textWrap">
-                    <div class="dukxiText"><i>Dukxi</i><br></div>
-                </div>
-            </div>
-        </div>
-        <div class="loginText">
-            로그인
-        </div>
-        <div class="contentWrap">
-            <div class="inputTitle">아이디</div>
-            <div class="inputWrap">
-                <input type="text"id="idInput" class="input" placeholder="dukxi@duksung.ac.kr">
-            </div>
 
-            <div style="margin-top: 26px;" class="inputTitle">비밀번호</div>
-            <div class="inputWrap">
-                <input type="password" id="passwordInput" class="input" placeholder="영문,숫자,특수문자 포함 8자 이상">
-            </div>
-
-            <div style="margin-top: 20px;" class="membership">
-                아직 Dukxi회원이 아니신가요?
-                <button style="margin-left: 6px;" class="membershipButton" onclick="goToSignUp()">지금 가입하기</button>
-                <script>
-                    function goToSignUp() {
-                        window.location.href = "signup.html";
-                    }
-                    </script>
-            </div>
+    <body style = "margin:0px">
+        <div class="header">
             <div>
-                <button id="loginButton" class="bottomButton" disabled onclick="login()">
-                    확인
-                </button>
+                <a href="./home.html">Home</a>
+                <a href="./board.html">Board</a>
+                <a href="./chat.html">Chat</a>
+                <a href="./myPage.html">My Page</a>
+            </div>
+        <!-- n -->
+        </div>
+        
+        <div class="page">
+            <div class="loginText">
+                로그인
+            </div>
+            <div class="contentWrap">
+                <div class="inputTitle">아이디</div>
+                <div class="inputWrap">
+                    <input type="text" id="idInput" class="input" placeholder="">
+                </div>
+    
+                <div style="margin-top: 26px;" class="inputTitle">비밀번호</div>
+                <div class="inputWrap">
+                    <input type="password" id="passwordInput" class="input" placeholder="영문,숫자,특수문자 포함 8자 이상">
+                </div>
+    
+                <div style="margin-top: 20px;" class="membership">
+                    아직 Dukxi회원이 아니신가요?
+                    <button style="margin-left: 6px;" class="membershipButton" onclick="goToSignUp()">지금 가입하기</button>
+                    <script>
+                        function goToSignUp() {
+                            window.location.href = "email.html";
+                        }
+                    </script>
+                </div>
+                <div>
+                    <button id="loginButton" class="bottomButton" disabled onclick="welcome()">
+                        확인
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-</body>
-</html>
+    </body>
 
-
-
+    <footer id="footer"></footer>
+    </html>

@@ -7,52 +7,77 @@
     <script src="signup.js"></script>
 
     <title>회원가입 페이지</title>
+    <style>
+        html, body {
+          height: 100%;
+          margin: 0;
+        }
+        .page-wrap {
+          display: flex;
+          flex-direction: column;
+          min-height: 100%;
+        }
+        .content {
+          flex-grow: 1;
+        }
+        .footer {
+          background-color: #f1f1f1;
+          padding: 20px;
+          text-align: center;
+          position: relative;
+        }
+      </style>
 </head>
-<body style = "margin:0px">
-    <div class="page">
-        <div class="header-content">
-            <div class="logoAndTextWrap">
-                <div class="logoWrap">
-                    <img src="img/dukxi_logo.png" alt="logo">
+
+
+
+    <body style = "margin:0px">
+        <div class="page-wrap">
+        <div class="header">
+            <div>
+                <a href="./home.html">Home</a>
+                <a href="./board.html">Board</a>
+                <a href="./chat.html">Chat</a>
+                <a href="./myPage.html">My Page</a>
+            </div>
+        <!-- n -->
+        </div>
+
+
+        <div class="page">
+            <div class="title">
+                회원가입
+            </div>
+    
+            <div class="contentWrap">
+                <div class="inputTitle">이름</div>
+                <div class="inputWrap">
+                    <input type="text" id="nameInput" class="input" placeholder="이름을 입력해 주세요.">
                 </div>
-                <div class="textWrap">
-                    <div class="dukxiText"><i>Dukxi</i><br></div>
+    
+                <div style="margin-top: 13px;" class="inputTitle">아이디</div>
+                <div class="inputWrap">
+                    <input type="text" id="idInput" class="input" placeholder="아이디를 입력해 주세요.">
+                </div>
+    
+                <div style="margin-top: 13px;" class="inputTitle">비밀번호</div>
+                <div class="inputWrap">
+                    <input type="password" id="passwordInput" class="input" placeholder="비밀번호를 입력해 주세요.">
+                </div>
+    
+                <div style="margin-top: 13px;" class="inputTitle">비밀번호 확인</div>
+                <div class="inputWrap">
+                    <input type="password" id="confirmPasswordInput" class="input" placeholder="비밀번호를 다시 입력해 주세요.">
+                </div>
+    
+                <div class="signUp">
+                    <button id="signUpButton" class="bottomButton" disabled onclick="completeSignUp()">가입하기</button>
                 </div>
             </div>
         </div>
-        <div class="title">
-            회원가입
-        </div>
-
-        <div class="contentWrap">
-
-            <div class="inputTitle">이름</div>
-            <div class="inputWrap">
-                <input type="text" id="nameInput" class="input" placeholder="이름을 입력해 주세요.">
-                
-            </div>
-        
-
-            <div style="margin-top: 26px;" class="inputTitle">이메일</div>
-            <div class="inputWrap">    
-                <input type="text" id="emailInput" class="input" placeholder="이메일을 입력해 주세요.">
-            </div>
-                <button style="margin-top: 13px;" class="verificationButton" onclick="sendVerificationCode()">이메일 인증</button>
-        
-            <div style="margin-top: 26px;" class="inputTitle">비밀번호</div>
-            <div class="inputWrap"> 
-                <input type="password" id="passwordInput" class="input" placeholder="비밀번호를 입력해 주세요.">
-            </div>
-
-            <div style="margin-top: 26px;" class="inputTitle">비밀번호 확인</div>
-            <div class="inputWrap">     
-                <input type="password" id="confirmPasswordInput" class="input" placeholder="비밀번호를 다시 입력해 주세요.">
-                </div>
-
-            <div class="signUp">
-                <button id="signUpButton" class="bottomButton" disabled onclick="completeSignUp()">가입하기</button>
-            </div>
-        </div>
-    </div>
+    <footer id="footer">
+        CodewithDs
+    </footer>
+</div>
 </body>
 </html>

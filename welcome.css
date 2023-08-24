@@ -39,17 +39,9 @@ body {
     font-family: Arial, sans-serif;
 }
 
-.last-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
 .last-content {
     text-align: center;
     padding: 20px;
-    border: 1px solid #ccc;
     border-radius: 5px;
     background-color: white;
 }
@@ -63,42 +55,64 @@ body {
     font-size: 20px;
     margin-top: 0;
 }
-
-.today-ride {
-    margin: 20px 0;
-    font-size: 16px;
-}
-
-.textbox {
-    width: 60px;
-    height: 20px;
-    border: 2px solid ;
-    border-color: #8b2845;
-}
-
-.buttons {
-    display: flex;
-    justify-content: space-between;
-}
-
-.complete-button,
-.report-button {
+.verificationButton{
+    margin-top:30px;
     padding: 10px 20px;
-    background-color: #8b2845;
-    color: white;
+    color:#525252;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 0;
+}
+
+.verificationButton:hover{
+    margin-top:30px;
+    padding: 10px 20px;
+    color:white;
+    border: none;
+    background-color:#8b2845;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+}
+
+.complete-button {
+    margin-top:30px;
+    padding: 10px 20px;
+    color:#525252;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.report-button {
-    background-color: #ccc;
+
+.complete-button:hover{
+    margin-top:30px;
+    padding: 10px 20px;
+    color:white;
+    border: none;
+    background-color:#8b2845;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.complete-button:hover,
-.report-button:hover {
-    background-color: #fff;
-    color: #8b2845;
+.last-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.textbox {
+    width: 30%;
+    max-width: 480px;
+    height: 20px;
+    border: 2px solid ;
+    border-color: #8b2845;
 }
 
 @media screen and (min-width: 1040px) {
@@ -110,3 +124,4 @@ body {
         width: 80%;
     }
 }
+

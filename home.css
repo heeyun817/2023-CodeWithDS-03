@@ -19,6 +19,12 @@
     margin: 0 15px;
     color: #503838;
 } */
+.nav-container {
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+    max-width: 800px;
+}
 
 .header a {
     text-decoration: none;
@@ -74,7 +80,6 @@
 .search-input {
     display: flex;
     align-items: center;
-    width: 100%;
 }
 
 .search-input input {
@@ -159,3 +164,56 @@
     background-color: #8b2845;
     color: #fff;
 }
+
+#location-select {
+    margin-right: 10px; /* 셀렉트 박스와 검색 입력란 사이의 간격 */
+}
+
+/* @media screen and (max-width:600px) {  
+    .search-box {width :80%;}
+    /* 기타 모바일 환경에서 필요한 스타일 
+}
+
+@media screen and (min-width :800px) {   
+    .search-box {width :60%;}
+/* 기타 데스크톱 환경에서 필요한 스타일 
+} */
+
+@media screen and (min-width: 1040px) {
+    .home-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh; /* Adjust min-height for larger screens */
+    }
+
+    .where {
+        width: 70%; /* Adjust width for larger screens */
+    }
+
+    .search-box {
+        font-size: 30px; /* Increase font size for larger screens */
+        padding: 20px; /* Increase padding for larger screens */
+    }
+
+    .search-box input {
+        font-size: 18px; /* Increase font size for larger screens */
+    }
+
+    .recommendations {
+        font-size: 18px; /* Increase font size for larger screens */
+        margin-top: 30px; /* Increase margin-top for larger screens */
+        margin-bottom: 30px; /* Increase margin-bottom for larger screens */
+    }
+
+    .choose li {
+        margin-bottom: 30px; /* Increase margin-bottom for larger screens */
+    }
+}
+
+#footer{
+    padding: 50px;
+    width: 100%;
+    background-color: #747476a8;
+    display: flex;
+ }
