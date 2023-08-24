@@ -6,7 +6,8 @@ from django.http import JsonResponse
 #import googlemaps
 from carpool import settings
 from board.models import Board
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
+from accounts.models import User
 import requests
 
 #def home(request):
@@ -36,9 +37,10 @@ def list(request):
 
 
 def create(request):
-    if request.method == "POST":
+    print(request.user.pk)
+    if request.method == "POST":   
         board = Board()
-        board.user = User.objects.get(pk = request.user.pk)
+        board.user = User.objects.get(pk=request.user.pk)
         board.s_title = request.POST.get("start")
         board.d_title = request.POST.get("end")
         board.date = request.POST.get("date")
@@ -49,6 +51,7 @@ def create(request):
         board.completion = False
         board.now_people = 0
         board.save()
+        board.member.set(None)
         return redirect("board:list")
     return render(request, 'kakaomap.html')
 

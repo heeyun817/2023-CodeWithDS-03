@@ -5,7 +5,7 @@ from board.models import Board  # 이 부분은 게시물 모델의 위치에 �
 
 
 class ChatRoom(models.Model): #채팅방
-    board = models.ForeignKey(Board, on_delete=models.CASCADE)
+    board = models.OneToOneField(Board, on_delete=models.CASCADE)
     #어디 글에 해당되는 채팅방인지
     user_group = models.ManyToManyField(User)
     #어떤 유저가 참여하는지 = 추가적으로 유저가 들어오고 나가는 것

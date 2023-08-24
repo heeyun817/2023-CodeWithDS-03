@@ -45,8 +45,13 @@ def create_chat_room(request, pk):
     # 채팅방 생성 코드 작성
     #chat_room = ChatRoom()
     #chat_room.board = board
-    chat_room = ChatRoom.objects.create(board=board)
-    
+    if (ChatRoom.objects.get(board=board) == None):
+        chat_room = ChatRoom.objects.create(board=board)
+    else:
+        chat_room = ChatRoom.objects.get(board=board)
+        chat_room.user_group.add(request.user)
+        board.member.add(request.user)
+        return redirect('channels:chat_room', pk=chat_room.pk)
     # 유저 그룹에 해당 유저 추가
     chat_room.user_group.add(request.user)
     chat_room.user_group.add(board.user)

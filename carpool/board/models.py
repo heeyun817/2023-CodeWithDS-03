@@ -24,6 +24,7 @@ class Board(models.Model):
     #구함 완료
     now_people = models.PositiveIntegerField()
     #현재까지 몇 명 구함
+    member = models.ManyToManyField(User)
 
 
     def __str__(self):
