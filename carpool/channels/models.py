@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from accounts.models import User
 from board.models import Board  # 이 부분은 게시물 모델의 위치에 맞게 수정
 
 

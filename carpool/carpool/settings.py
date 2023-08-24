@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'mypage',
     'main'
 ]
+AUTH_USER_MODEL = 'accounts.User'
 
 
 GOOGLE_MAPS_API_KEY = 'AIzaSyAtoiOxIuDVSOiGRLzxiSyshAbW5ymFmGc'
