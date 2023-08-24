@@ -9,6 +9,7 @@ from board.models import Board
 # from channels.models import ChatRoom
 from accounts.models import User
 
+#그냥 마이페이지
 @login_required
 def mypage(request):
     user = request.user
@@ -23,7 +24,7 @@ def mypage(request):
 
     return render(request, 'mypage.html', {'user_profile': user_profile})
 
-#이름, 전화번호, 프로필 사진만 변경 -> 이메일 변경 x
+#이름, 프로필 사진만 변경 -> 이메일 변경 x
 @login_required
 def edit_mypage(request):
     user = request.user  # 현재 로그인한 사용자
@@ -49,7 +50,7 @@ def completed_boards(request):
 
     # 채팅방과 연결된 게시글을 가져옵니다.
     # completed_boards = Board.objects.filter(Q(completion=True, chatroom__in=chat_rooms) | Q(user=user, completion=True))
-    completed_boards = Board.objects.filter(Q(user=user, completion=True)|Q(member=user)).distinct() #users=user
+    completed_boards = Board.objects.filter(completion=True,member=user).distinct() #users=user
     return render(request, 'completed_boards.html', {'completed_boards': completed_boards})
 
 
