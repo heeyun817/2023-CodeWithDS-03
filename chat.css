@@ -19,12 +19,6 @@
     width: 90%;
     max-width: 800px;
 }
-/* .click-text{
-    text-decoration: none;
-    color: white;
-    margin: 0 15px;
-    color: #503838;
-} */
 
 .header a {
     text-decoration: none;
@@ -163,20 +157,15 @@
     }
 }
 
-/* New styles for larger screens (min-width: 1040px) */
-@media screen and (min-width: 1040px) {
-    .chat-box {
-        width: 50%; /* Adjust width for larger screens */
-    }
-}
-
-@media screen and (min-width: 1040px) {
+@media screen and (min-width: 320px) {
     .header {
-        justify-content: center;
+      /* 여기에 필요한 스타일을 적용하세요. 예: */
+      font-size: 18px;
     }
 
-    .nav-container {
-        width: 80%;
+    .header a {
+        /* 여기에 필요한 스타일을 적용하세요. 예: */
+        margin: 0 10px;
     }
+    
 }
-

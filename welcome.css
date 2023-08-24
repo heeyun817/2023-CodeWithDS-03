@@ -14,10 +14,10 @@
 } 
 
 .nav-container {
-    display: flex;
-    justify-content: space-around;
-    width: 90%;
+    justify-content: center; /* 수정된 부분 */
+    width: 100%; /* 수정된 부분 */
     max-width: 800px;
+    padding: 0 30px; /* 수정된 부분 */
 }
 
 .header a {
@@ -55,6 +55,7 @@ body {
     font-size: 20px;
     margin-top: 0;
 }
+
 .verificationButton{
     margin-top:30px;
     padding: 10px 20px;
@@ -122,6 +123,37 @@ body {
 
     .nav-container {
         width: 80%;
+    }
+}
+
+@media screen and (min-width: 320px) {
+    .header {
+      /* 여기에 필요한 스타일을 적용하세요. 예: */
+      font-size: 18px;
+    }
+
+    .header a {
+        /* 여기에 필요한 스타일을 적용하세요. 예: */
+        margin: 0 10px;
+    }
+
+    .inputWrap {
+        /* 필요한 변경을 적용하세요. 예: */
+        margin-left: 20px;
+        margin-right: 10px;
+    }
+
+    .inputTitle {
+        margin-left: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #262626;
+    }
+
+    .bottomButton {
+        width: 80%;
+        margin-left: 20px;
+
     }
 }
 

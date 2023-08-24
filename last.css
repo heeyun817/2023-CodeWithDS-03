@@ -1,7 +1,6 @@
 .header{
     background:#8b2845;
     width: 100%;
-    display: flex;
     padding-top: 15px;
     padding-bottom: 15px;
     font-weight: 700;
@@ -15,7 +14,7 @@
 
 .nav-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     width: 90%;
     max-width: 800px;
 }
@@ -101,12 +100,15 @@ body {
     color: #8b2845;
 }
 
-@media screen and (min-width: 1040px) {
+
+@media screen and (min-width: 320px) {
     .header {
-        justify-content: center;
+      /* 여기에 필요한 스타일을 적용하세요. 예: */
+      font-size: 18px;
     }
 
-    .nav-container {
-        width: 80%;
+    .header a {
+        /* 여기에 필요한 스타일을 적용하세요. 예: */
+        margin: 0 10px;
     }
 }

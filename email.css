@@ -15,9 +15,10 @@
 
 .nav-container {
     display: flex;
-    justify-content: space-around;
-    width: 90%;
-    max-width: 800px;
+    justify-content: center; /* 수정된 부분 */
+width: 100%; /* 수정된 부분 */
+max-width: 800px;
+padding: 0 30px; /* 수정된 부분 */
 }
 
 .header a {
@@ -142,20 +143,17 @@ body {
     border-color: #8b2845;
 }
 
-@media screen and (min-width: 1040px) {
+@media screen and (min-width: 320px) {
     .header {
-        justify-content: center;
+      /* 여기에 필요한 스타일을 적용하세요. 예: */
+      font-size: 18px;
     }
 
-    .nav-container {
-        width: 80%;
+    .header a {
+        /* 여기에 필요한 스타일을 적용하세요. 예: */
+        margin: 0 10px;
     }
 }
 
-#footer{
-    padding: 40px;
-    width: 100%;
-    background-color: #747476a8;
-    display: flex;
-  }
+
 
