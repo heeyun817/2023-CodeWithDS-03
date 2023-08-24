@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>내 기록</title>
+</head>
+<body>
+    <h1>내 기록</h1>
+    {% if my_posts %}
+        <ul>
+            {% for post in my_posts %}
+                <li>
+                    <strong>{{ post.s_title }} - {{ post.d_title }}</strong>
+                    <p>날짜: {{ post.date }}</p>
+                    <p>내용: {{ post.content }}</p>
+                    <p>필요한 인원: {{ post.people }}</p>
+                    <p>총 비용: {{ post.total }}</p>
+                    <p>완료 여부: {% if post.completion %} 완료됨 {% else %} 완료되지 않음 {% endif %}</p>
+                    <!-- 필요한 경우 Board 모델에서 더 많은 정보를 추가할 수 있습니다 -->
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>아직 게시물을 작성하지 않았습니다.</p>
+    {% endif %}
+</body>
+</html>

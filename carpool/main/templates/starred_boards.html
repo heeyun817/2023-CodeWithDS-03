@@ -1,0 +1,28 @@
+<!-- starred_boards.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>즐겨찾은 게시물</title>
+</head>
+<body>
+    <h1>즐겨찾은 게시물</h1>
+
+    {% if starred_boards %}
+        <ul>
+            {% for starred_board in starred_boards %}
+                <li>
+                    <a href="{% url 'board_detail' board_id=starred_board.board.id %}">
+                        {{ starred_board.board.s_title }} - {{ starred_board.board.d_title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>즐겨찾은 게시물이 없습니다.</p>
+    {% endif %}
+
+    <a href="{% url 'board:list' %}">게시물 목록으로 돌아가기</a>
+</body>
+</html>
