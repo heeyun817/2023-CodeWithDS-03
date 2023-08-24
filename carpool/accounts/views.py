@@ -23,7 +23,7 @@ def signup(request):
                 user = User.objects.create_user(username=username, password=password1)
                 user.save()
 
-                return redirect('home')  # 로그인 이후 페이지로 이동
+                return redirect('accounts:home')  # 로그인 이후 페이지로 이동
             else:
                 error_message = '비밀번호가 일치하지 않습니다.'
                 return render(request, 'signup.html', {'form': form, 'error': error_message})
