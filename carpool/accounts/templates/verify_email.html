@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,8 +9,70 @@
     <h2>이메일 인증 코드를 입력하세요:</h2>
     <form method="POST">
         {% csrf_token %}
-        <input type="text" name="verification_code" required>
+        <input type="text" name="confirmation_code" required>
         <button type="submit">인증하기</button>
     </form>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Email Verification</title>
+</head>
+<body>
+    <h1>이메일 인증</h1>
+    <p>당신의 덕성여자대학교 메일로 온 코드를 작성해주세요.</p>
+    
+    <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="email" value="{{ email }}">
+        
+        <div>
+            <label for="verification_code">Verification Code:</label>
+            <input type="text" name="verification_code" required>
+        </div>
+        
+        <input type="submit" value="Verify">
+    </form>
+    
+    <p><a href="{% url 'accounts:signup' %}">회원가입 페이지로 돌아가기</a></p>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>이메일 인증</title>
+</head>
+<body>
+    <h1>이메일 인증</h1>
+    <form method="POST" id="verification-form">
+        {% csrf_token %}
+        
+        <label for="verification_code">인증 코드:</label>
+        <input type="text" name="verification_code" id="verification_code" required>
+        <input type="hidden" name="random_number" id="random_number" value="{{ random_number }}">
+        <input type="hidden" name="email" id="email" value="{{ email }}">
+        
+        <input type="submit" value="확인">
+    </form>
+
+    <p id="error-message" style="color: red;"></p>
+
+    <script>
+        document.getElementById('verification-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var userEnteredCode = document.getElementById('verification_code').value;
+            var randomCode = document.getElementById('random_number').value;
+
+            if (userEnteredCode === randomCode) {
+                this.submit();
+            } else {
+                document.getElementById('error-message').textContent = '인증 코드가 일치하지 않습니다.';
+            }
+        });
+    </script>
 </body>
 </html>
