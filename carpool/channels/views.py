@@ -39,26 +39,56 @@ from django.shortcuts import redirect, get_object_or_404
 from .models import ChatRoom
 from board.models import Board  # 이 부분은 게시물 모델의 위치에 맞게 수정
 
+# def create_chat_room(request, pk):
+#     board = get_object_or_404(Board, pk=pk)
+#
+#     # 채팅방 생성 코드 작성
+#     #chat_room = ChatRoom()
+#     #chat_room.board = board
+#     if (ChatRoom.objects.get(board=board) == None):
+#         chat_room = ChatRoom.objects.create(board=board)
+#     else:
+#         chat_room = ChatRoom.objects.get(board=board)
+#         chat_room.user_group.add(request.user)
+#         board.member.add(request.user)
+#         return redirect('channels:chat_room', pk=chat_room.pk)
+#     # 유저 그룹에 해당 유저 추가
+#     chat_room.user_group.add(request.user)
+#     chat_room.user_group.add(board.user)
+#     #본인이면 채ㅌ이방 생성하기 버튼 안 보이게 해야 함
+#     chat_room.save()
+#
+#     #chat_room = ChatRoom.objects.create(board=board)  # 예시로 채팅방 생성 코드 작성
+#
+#     # 생성된 채팅방 페이지로 리다이렉트
+#     return redirect('channels:chat_room', pk=chat_room.pk)
+
+
 def create_chat_room(request, pk):
     board = get_object_or_404(Board, pk=pk)
-    
+
     # 채팅방 생성 코드 작성
-    #chat_room = ChatRoom()
-    #chat_room.board = board
+    # chat_room = ChatRoom()
+    # chat_room.board = board
     if (ChatRoom.objects.get(board=board) == None):
         chat_room = ChatRoom.objects.create(board=board)
     else:
         chat_room = ChatRoom.objects.get(board=board)
-        chat_room.user_group.add(request.user)
-        board.member.add(request.user)
-        return redirect('channels:chat_room', pk=chat_room.pk)
+        if (board.now_people) < board.people:
+            chat_room.user_group.add(request.user)
+            board.member.add(request.user)
+            board.now_people = chat_room.user_group.count() - 1
+            board.save()
+            return redirect('channels:chat_room', pk=chat_room.pk)
+        else:
+            return redirect('board:list')
     # 유저 그룹에 해당 유저 추가
     chat_room.user_group.add(request.user)
     chat_room.user_group.add(board.user)
-    #본인이면 채ㅌ이방 생성하기 버튼 안 보이게 해야 함
+    # 본인이면 채ㅌ이방 생성하기 버튼 안 보이게 해야 함
     chat_room.save()
 
-    #chat_room = ChatRoom.objects.create(board=board)  # 예시로 채팅방 생성 코드 작성
+    # chat_room = ChatRoom.objects.create(board=board)  # 예시로 채팅방 생성 코드 작성
 
     # 생성된 채팅방 페이지로 리다이렉트
     return redirect('channels:chat_room', pk=chat_room.pk)

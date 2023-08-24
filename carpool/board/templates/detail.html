@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -12,17 +12,12 @@
   {% endif %}
   <p>{{board.s_title}}</p>
   <p>{{board.d_title}}</p>
-  <p>{{board.people}}</p>
-  <p>현재 몇 명{{board.completion}}</p>
+  <p>구하는인원{{board.people}}</p>
+  <p>현재 몇 명{{board.now_people}}</p>
 
-  {% if request.user.is_authenticated and request.user != board.user %}
-  <a href="{% url 'channels:create_chat_room' board.pk %}">채팅방 만들기</a>
-  => 이건 이제 로그인한 회원만 보이도록 해서 채팅방이 개설되도록 사실 문서 하나가 만들어지는 것
-  리퀘스트 유저랑, 그 글을 쓴 유저가 들어가도록 해야겠지 ;;;
-  {% endif %}
-  채팅방이 만들어지면 그 안으로 유저가 들어가도록 해야 하고
-  create_chat_room이 되면 ㄱㄱㄱㄱㄱ
-  아니면 조회로 가도록
+
+  <a href="{% url 'channels:create_chat_room' board.pk %}">채팅방 입장하기</a>
+
 
 
 
@@ -30,4 +25,96 @@
   
   
 </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="icon" href="{% static 'favicon.png' %}" />
+    <link href="{% static 'detail/detail.css' %}" rel="stylesheet" >
+    <link href="{% static 'main.css' %}" rel="stylesheet" >
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" /> 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>   
+    <title>DukXi</title>
+</head>
+
+<body style="margin:0px">
+    <div id="App">
+        <div id="my-page-nav">
+            <a href="{% static 'board' %}">
+                <span class="material-symbols-outlined" id="back">
+                    arrow_back_ios_new
+                </span>
+            </a>
+            <div id="detail">상세 정보</div>
+            <div></div>
+        </div>
+        <br /><br /><br /><hr/>
+        <div id="now">
+            <h2 id="key"></h2>
+            <hr />
+            <h3 id="content"></h3>
+            <h4 id="destination"></h4>
+        </div>
+        <a href="{% channels:chat %}">
+            <div id="join-button">
+                <button id="join"><span>채팅 참여</span></button>
+            </div>
+        </a>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // URL에서 쿼리 파라미터 가져오기
+                const queryString = window.location.search;
+                const urlParams = new URLSearchParams(queryString);
+                
+                // 값 가져오기
+                const id = urlParams.get('id');
+                const start = urlParams.get('start');
+                const end = urlParams.get('end');
+                let many = parseInt(urlParams.get('many'));
+    
+                // 출력
+                const idOutput = document.getElementById('key');
+                idOutput.innerText = `${id}. ${start} 부터 ${end} 까지 같이 가요!`;
+
+
+                const content = document.getElementById('content');
+                content.innerText = `같이 갈 사람 ${many}명 모집중!`;
+
+                const destination = document.getElementById('destination');
+                destination.innerHTML = `출발 장소 : ${start} <br/><br/>도착 장소 : ${end}`;
+
+
+                const joinButton = document.getElementById('join');
+            
+                joinButton.addEventListener('click', function() {
+                    if (many > 0) {
+                        many--; // 참여자 수를 1 감소시킴
+                        content.innerText = `같이 갈 사람 ${many}명 모집중!`;
+    
+                        if (many === 0) {
+                            content.innerText = "마감되었습니다!";
+                            joinButton.disabled = true; // 버튼 비활성화
+                        }
+                        // 변경된 'many' 값을 로컬 스토리지에 저장
+                        localStorage.setItem('many', many.toString());
+
+                        // many 바뀐 값으로 URL 업데이트
+                        urlParams.set('many', many.toString());
+                        const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+                        window.history.pushState({}, '', newUrl);
+                    }
+                });
+            });
+        </script>
+        <footer id="footer">
+            CodeWithDuksung 03
+        </footer>
+    </div>
+</body>
+
 </html>

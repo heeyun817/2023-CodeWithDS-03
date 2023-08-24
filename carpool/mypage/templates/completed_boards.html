@@ -7,7 +7,7 @@
     <h1>매칭 완료된 게시글 목록</h1>
     <ul>
         {% for board in completed_boards %}
-            <li>{{ board.s_title }} - {{ board.d_title }}</li>
+        <a href="{% url 'board:detail' board.pk %}"><li>{{ board.s_title }} - {{ board.d_title }}</li></a>
         {% endfor %}
     </ul>
 </body>

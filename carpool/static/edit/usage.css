@@ -1,0 +1,38 @@
+#use{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 10px;
+}
+
+  
+.usage-description {
+    margin-top: 1px;
+    font-weight: bold;
+    text-align: left;
+}
+  
+.usage-time {
+    color: #777;
+    text-align: left;
+}
+  
+
+.usage-box{
+  width: 80%;
+  height: 100px;
+  background-color: ghostwhite;
+  margin: 0 auto;
+  margin-bottom: 50px;
+  padding: 20px;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  border: 2px solid #ccc;
+}
+
+.usage-history{
+    text-align: center;
+    width: 100%;
+}

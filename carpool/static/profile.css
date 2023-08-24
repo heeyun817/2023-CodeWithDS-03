@@ -1,0 +1,122 @@
+#profile {
+    margin-left: 20px;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 20px;
+}
+  
+#profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 100px;
+    margin-left: 40px;
+    margin-right: 40px;
+    border: 2px solid #77777768;
+}
+  
+#profilelist {
+    list-style-type: none;
+}
+
+#new-email {
+  text-align: left;
+  font-size: 20px;
+  color: gray;
+  padding-right: 62px;
+}
+
+#new-email {
+  text-align: left;
+  font-size: 20px;
+  color: gray;
+  padding-right: 30px;
+}
+
+
+/* 브라우저 창 너비가 529px 미만일 때 스타일 */
+@media screen and (max-width: 529px){
+  #profile-name {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  #profile-email {
+    text-align: left;
+    font-size: 16px;
+    color: gray;
+  }
+}
+
+
+/* 브라우저 창 너비가 529px 이상일 때 스타일 */
+@media screen and (min-width: 529px){
+  #profile-name {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  #profile-email {
+    text-align: left;
+    font-size: 20px;
+    color: gray;
+  }
+
+  #profile-img {
+    margin-right: 60px;
+  }
+}
+
+
+@media screen and (min-width: 840px){
+  #profile li{
+    margin-left: 50px;
+  }
+  #profile-img {
+    margin-right: 100px;
+    margin-left: 60px;
+    margin-right: 50px;
+  }
+}
+
+
+@media screen and (min-width: 930px){
+  #profile-img {
+    margin-right: 100px;
+    margin-left: 60px;
+    margin-right: 50px;
+  }
+}
+
+@media screen and (min-width: 900px){
+  #table {
+    width: 90%;
+    text-align: right;
+  }
+  #profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #profile-img{
+    margin-right: 100px;
+  }
+}
+
+@media screen and (min-width: 1100px){
+  #table {
+    width: 90%;
+    text-align: right;
+  }
+  #profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #profile-img{
+    margin-left: 0px;
+  }
+}

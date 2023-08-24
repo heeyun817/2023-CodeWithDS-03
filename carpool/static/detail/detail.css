@@ -1,0 +1,62 @@
+#body{
+    margin: 0;
+    padding: 0;
+}
+  
+#App {
+    overflow-x: hidden;
+    text-align: center;
+}  
+
+#detail{
+    font-weight: 700;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    padding-right: 50px;
+}
+
+#now{
+    height: 65vh;
+}
+
+#content{
+    text-align: center;
+}
+
+
+#join {
+    background-color: #8b2845;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+#footer{
+    margin-top: 100px;
+}
+
+#join span{
+    position: relative;
+    transition: 0.5s;
+}
+
+#join span:after{
+    content: '\00bb';
+    position: absolute;
+    transition: 0.5s;
+    opacity: 0;
+    right: -20px;
+}
+
+#join:hover span{
+    padding-right: 25px;
+}
+
+#join:hover span:after {
+    opacity: 1;
+    right: 0;
+}

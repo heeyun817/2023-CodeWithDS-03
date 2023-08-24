@@ -15,10 +15,10 @@
     <body style = "margin:0px">
         <div class="header">
             <div>
-                <a href="{% static 'home' %}">홈</a>
-                <a href="./board.html">게시판</a>
-                <a href="./chat.html">채팅방</a>
-                <a href="./myPage.html">마이페이지</a>
+                <a href="{% url 'main:home' %}">홈</a>
+                
+                <a href="{% url 'channels:chat' %}">채팅방</a>
+                <a href="{% url 'mypage:mypage' %}">마이페이지</a>
             </div>
         <!-- n -->
         </div>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home/home.css' %}">
+
+    <div class="header">
+        <div>
+            <a href="{% url 'main:home' %}"><span class="click-text">Home</span></a>
+            
+            <a href="{% static 'channels:chat' %}">Chat</a>
+            <a href="{% static 'mypage:mypage' %}">My Page</a>
+        </div>
+
+        <div>
+            <a href="{% url 'main:first' %}" style="padding-right: 10px;">로그아웃</a>
+        </div>
+
+</div>
+
+</head>
+<body style = "margin:0px">
+    <div class="home-container">
+        <div class="where">
+            <div class="search-box">
+                <h3><span class="red-text">Dukxi</span>와 함께 
+                    <br>어디로 가볼까요?</h3>
+                
+                <div class="search-input">
+                    <select id="location-select" name="location">
+                        <option value="">선택하세요</option>
+                        <option value="start">덕대에서 출발</option>
+                        <option value="end">덕대로 도착</option>
+                    </select>
+    
+                    <input type="text" placeholder="출발지, 도착지 검색하기">
+                    <img src="{% static 'image/search_icon.png' %}" alt="Search Icon" class="icon">
+                </div>
+            </div>
+    
+            <div class="recommendations">
+                <h3>여긴 어때요?</h3>
+                <ul class="place-list">
+                    <li>덕성여대 정문</li>
+                    <li>수유역</li>
+                    <li>덕성여대 후문</li>
+                    <li>서울역</li>
+                </ul>  
+            </div>
+
+            <hr>
+            <div class="navigation">
+                <ul class="choose">
+                    <li><a href="/Board">직접 찾아보기</a></li>
+                    <li><a href="/Write">함께 할 멤버 직접 모집하기</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
