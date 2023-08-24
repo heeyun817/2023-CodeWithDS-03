@@ -2,17 +2,19 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="main.css" rel="stylesheet" href="styles.css">
-    <link href="edit.css" rel="stylesheet" href="styles.css">
+    {% load static %}
+    <link rel="icon" href="{% static 'favicon.png' %}" />
+    
+    <link href="{% static 'main.css' %}" rel="stylesheet">
+    <link href="{% static 'edit/edit.css' %}" rel="stylesheet" >
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <title>DukXi</title>
 </head>
 <body id = "body">
     <div id="App">
         <div id="my-page-nav">
-            <a href= "edit.html">
+            <a href= "{% url 'mypage:edit_mypage' %}">
                 <span class="material-symbols-outlined" id="back">
                 arrow_back_ios_new
                 </span>

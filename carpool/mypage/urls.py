@@ -14,8 +14,3 @@ urlpatterns = [
     path('emailedit/', TemplateView.as_view(template_name='emailEdit.html'), name='emailedit'),
     path('password/', TemplateView.as_view(template_name='passwordEdit.html'), name='password'),
 ]
-
-
-
-
-        
