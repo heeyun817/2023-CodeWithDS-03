@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
+from accounts.models import User
 from board.models import Board
 
 #프로필 모델
