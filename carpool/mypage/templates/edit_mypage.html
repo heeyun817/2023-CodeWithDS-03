@@ -1,22 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <title>프로필 수정</title>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="icon" href="{% static 'favicon.png' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="{% static 'main.css' %}" rel="stylesheet">
+    <link href="{% static 'edit/edit.css' %}" rel="stylesheet">
+    <link href="{% static 'profile.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <title>DukXi</title>
 </head>
-<body>
-    <h1>프로필 수정</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <label for="username">Username:</label>
-        <input type="text" name="username" value="{{ user.username }}"><br>
-        {% if user_profile.image %}
-        <p>현재 프로필 사진:</p>
-        <img src="{{ user_profile.image.url }}" alt="현재 프로필 사진">
-    {% else %}
-        <p>프로필 이미지 없음</p>
-    {% endif %}
-        {{ form.as_p }}
-        <button type="submit">저장</button>
-    </form>
+<body id = "body">
+    <div id="App">
+        <div id="my-page-nav">
+            <a href= "{% static 'mypage:mypage' %}">
+                <span class="material-symbols-outlined" id="back">
+                arrow_back_ios_new
+                </span>
+            </a>
+            <div id="edit">회원 정보 관리</div>
+            <div></div>
+        </div>
+        <br /><br /><br />
+        <table id='table'>
+            <tbody id="profile">
+              <td>
+                <img id="profile-img" src="{% static favicon.png %}" alt="Profile" />
+              </td>
+              <td>
+                <div id='profilelist'>
+                  <li style="text-align: left;">
+                    <div id="profile-name">안녕하세요, <span id="new-name">ㅎㅇ</span> 님!</div>
+                  </li> <br/>
+                  <li>
+                    <div style="text-align: left;">
+                        <span id="profile-email"><span id="new-email">kim@naver.com</span></span>
+                    </div>
+                  </li><br/>
+                </div>
+              </td>
+            </tbody>
+          </table><hr/><br/><hr/>
+        
+        <a href="{% url 'mypage:nameedit' %}" class="editpage">
+            <h3>이름 변경</h3>
+        </a><hr/><br/><hr/>
+
+        <a href="{% url 'mypage:emailedit' %}" class="editpage">
+            <h3>이메일 변경</h3>
+        </a><hr/><br/><hr/>
+
+        <a href="{% url 'mypage:password' %}" class="editpage">
+            <h3>비밀번호 변경</h3>
+        </a><hr/><br/><br/><br/><br/>
+
+        <footer id='footer'>
+            CodeWithDuksung 03
+        </footer>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const params = new URLSearchParams(window.location.search);
+                const newName = params.get('newName');
+                if (newName) {
+                    // 받아온 이름으로 프로필 이름을 업데이트
+                    document.getElementById('new-name').textContent = newName;
+                }
+            });
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const params = new URLSearchParams(window.location.search);
+                const newEmail = params.get('newEmail');
+                if (newEmail) {
+                    document.getElementById('new-email').textContent = newEmail;
+                }
+            });
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const params = new URLSearchParams(window.location.search);
+                const newNumber = params.get('newNumber');
+                if (newNumber) {
+                    document.getElementById('new-number').textContent = newNumber;
+                }
+            });
+        </script>
 </body>
 </html>

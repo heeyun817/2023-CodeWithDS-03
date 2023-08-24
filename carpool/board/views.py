@@ -6,6 +6,7 @@ from django.http import JsonResponse, HttpResponse
 #import googlemaps
 from carpool import settings
 from board.models import Board
+# from board.models import WalkBoard
 #from django.contrib.auth.models import User
 from accounts.models import User
 from channels.models import ChatRoom

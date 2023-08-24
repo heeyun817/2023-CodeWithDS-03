@@ -1,0 +1,159 @@
+#body{
+    height: 100vh;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+  
+#App {
+    overflow-x: hidden;
+    text-align: center;
+}
+
+.edit-profile-form{
+  padding-bottom: 30%;
+  margin: 50px;
+  margin-top: 20%;
+  align-items: center;
+  height: 70vh;
+}
+
+#edit{
+    font-weight: 700;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    margin-right: 50px;
+}
+
+#edit-profile-form{
+    height: 90vh
+}
+
+input[type="text"]:focus {
+  border-color:  #8b2845
+}
+
+.b{
+  background-color: #8b2845;
+  color: white;
+  border: 2px solid #8b2845;
+}
+
+
+
+#profile {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    padding: 20px;
+}
+  
+#profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 100px;
+    margin-left: 40px;
+    margin-right: 40px;
+    border: 2px solid #77777768;
+}
+  
+#profilelist {
+    list-style-type: none;
+}
+
+.editpage:link{color: black;}
+.editpage:visited{color: black;}
+.editpage{
+  text-decoration: none;
+}
+
+
+
+  /* 브라우저 창 너비가 529px 미만일 때 스타일 */
+@media screen and (max-width: 529px){
+  #profile-name {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  #profile-number{
+    text-align: left;
+    font-size: 16px;
+  }
+  #profile-email{
+    text-align: left;
+    font-size: 16px;
+  }
+}
+
+
+/* 브라우저 창 너비가 529px 이상일 때 스타일 */
+@media screen and (min-width: 529px){
+  #profile-name, #profile-email {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  #profile-number, #profile-email {
+    text-align: left;
+    font-size: 20px;
+    color: gray;
+  }
+
+  #profile-img {
+    margin-right: 60px;
+  }
+}
+
+
+@media screen and (min-width: 840px){
+  #profile li{
+    margin-left: 50px;
+  }
+  #profile-img {
+    margin-right: 100px;
+    margin-left: 60px;
+    margin-right: 50px;
+  }
+}
+
+
+@media screen and (min-width: 930px){
+  #profile-img {
+    margin-right: 100px;
+    margin-left: 60px;
+    margin-right: 50px;
+  }
+}
+
+@media screen and (min-width: 900px){
+  #table {
+    width: 90%;
+    text-align: right;
+  }
+  #profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #profile-img{
+    margin-right: 100px;
+  }
+}
+
+@media screen and (min-width: 1100px){
+  #table {
+    width: 90%;
+    text-align: right;
+  }
+  #profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #profile-img{
+    margin-left: 0px;
+  }
+}
