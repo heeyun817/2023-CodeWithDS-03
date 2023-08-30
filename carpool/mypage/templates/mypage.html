@@ -18,15 +18,14 @@
     <p>전화번호: {{ user_profile.phone_number }}</p>
    <p>가입 일자: {{ user_profile.signup_date }}</p>
     <a href="{% url 'mypage:my_record' %}">내가 작성한 글</a><br>
-    <a href="{% url 'mypage:completed_boards' %}">사용 기록 보기</a>
 </body>
 </html> -->
 
 <!DOCTYPE html>
+{% load static %}
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    {% load static %}
     <link rel="icon" href="{% static 'favicon.png' %}" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="{% static 'mypage/mypage.css' %}" type="text/css" rel="stylesheet">
@@ -42,7 +41,7 @@
 <body id = "body" style="margin: 0px;">
     <div id="App">
         <div id="my-page-nav">
-          <a href= "{% url 'main:home' %}">
+          <a href= "{% url 'main:search' %}">
             <span class="material-symbols-outlined" id="back">
               arrow_back_ios_new
             </span>
@@ -57,15 +56,19 @@
         <table id='table'>
           <tbody id="profile">
             <td>
-              <img id="profile-img" src="{% static 'image/image.png' %}" alt="Profile" />
+              {% if user_profile.image %}
+              <img id="profile-img2" src="{{ user_profile.image.url }}" alt="프로필 이미지">
+              {% else %}
+               <img id="profile-img" src="{% static 'image/image.png' %}" alt="Profile" />
+              {% endif %}
             </td>
             <td>
               <div id='profilelist'>
                 <li>
-                  <div id="profile-name">안녕하세요, {{ name }} 님!</div>
+                  <div id="profile-name">안녕하세요, {{ user_profile.username }} 님!</div>
                 </li> <br/>
                 <li>
-                  <div id="profile-email">{{ email }}</div>
+                  <div id="profile-email">{{ user_profile.email }}</div>
                 </li>
               </div>
             </td>
@@ -73,43 +76,51 @@
         </table>
         <hr/>
         <h2 id="use">사용 내역</h2> <hr/><br/>
-        <div id="usageHistoryContainer">
+        {% for board in completed_boards %}
+        <div class="usage-box">
+        <div class="usage-history">
+            <h2 class="usage-description">{{ board.s_title }} - {{ board.d_title }}</h2>
+            <p class="usage-time">{{ board.create }}</p>
         </div>
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                let usageHistory = [
-                { id: 1, description: "사용 내역", time: '2023-08-21 10:30 AM' },
-                { id: 2, description: "사용 내역", time: '2023-08-21 10:30 AM' },
-                { id: 3, description: "사용 내역", time: '2023-08-21 10:30 AM' },
-                { id: 4, description: "사용 내역", time: '2023-08-21 10:30 AM' },
-                // ... 추가 사용내역 데이터
-                ];
-            
-                const usageHistoryContainer = document.getElementById("usageHistoryContainer");
-            
-                usageHistory.forEach(use => {
-                const usageBox = document.createElement("div");
-                usageBox.className = "usage-box";
-            
-                const usageHistoryDiv = document.createElement("div");
-                usageHistoryDiv.className = "usage-history";
-            
-                const h2 = document.createElement("h2");
-                h2.className = "usage-description";
-                h2.innerText = `${use.id}. ${use.description}`;
-            
-                const p = document.createElement("p");
-                p.className = "usage-time";
-                p.innerText = `이용 시간: ${use.time}`;
-            
-                usageHistoryDiv.appendChild(h2);
-                usageHistoryDiv.appendChild(p);
-            
-                usageBox.appendChild(usageHistoryDiv);
-                usageHistoryContainer.appendChild(usageBox);
-                });
-            });
-        </script>
+        </div>
+        {% endfor %}
+<!--        <div id="usageHistoryContainer">-->
+<!--        </div>-->
+<!--        <script>-->
+<!--            document.addEventListener("DOMContentLoaded", function() {-->
+<!--                let usageHistory = [-->
+<!--                { id: 1, description: "사용 내역", time: '2023-08-21 10:30 AM' },-->
+<!--                { id: 2, description: "사용 내역", time: '2023-08-21 10:30 AM' },-->
+<!--                { id: 3, description: "사용 내역", time: '2023-08-21 10:30 AM' },-->
+<!--                { id: 4, description: "사용 내역", time: '2023-08-21 10:30 AM' },-->
+<!--                // ... 추가 사용내역 데이터-->
+<!--                ];-->
+
+<!--                const usageHistoryContainer = document.getElementById("usageHistoryContainer");-->
+
+<!--                usageHistory.forEach(use => {-->
+<!--                const usageBox = document.createElement("div");-->
+<!--                usageBox.className = "usage-box";-->
+
+<!--                const usageHistoryDiv = document.createElement("div");-->
+<!--                usageHistoryDiv.className = "usage-history";-->
+
+<!--                const h2 = document.createElement("h2");-->
+<!--                h2.className = "usage-description";-->
+<!--                h2.innerText = `${use.id}. ${use.description}`;-->
+
+<!--                const p = document.createElement("p");-->
+<!--                p.className = "usage-time";-->
+<!--                p.innerText = `이용 시간: ${use.time}`;-->
+
+<!--                usageHistoryDiv.appendChild(h2);-->
+<!--                usageHistoryDiv.appendChild(p);-->
+
+<!--                usageBox.appendChild(usageHistoryDiv);-->
+<!--                usageHistoryContainer.appendChild(usageBox);-->
+<!--                });-->
+<!--            });-->
+<!--        </script>-->
         <br/><br/><br/>
         <footer id='footer'>
             CodeWithDuksung 03

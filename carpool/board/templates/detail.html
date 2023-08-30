@@ -25,7 +25,7 @@
   
   
 </body>
-</html> -->
+</html>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -45,7 +45,7 @@
 <body style="margin:0px">
     <div id="App">
         <div id="my-page-nav">
-            <a href="{% static 'board' %}">
+            <a href="{% url 'board:list' %}">
                 <span class="material-symbols-outlined" id="back">
                     arrow_back_ios_new
                 </span>
@@ -60,7 +60,7 @@
             <h3 id="content"></h3>
             <h4 id="destination"></h4>
         </div>
-        <a href="{% channels:chat %}">
+        <a href="{% url 'channels:create_chat_room' board.pk %}">
             <div id="join-button">
                 <button id="join"><span>채팅 참여</span></button>
             </div>
@@ -72,11 +72,10 @@
                 const urlParams = new URLSearchParams(queryString);
                 
                 // 값 가져오기
-                const id = urlParams.get('id');
-                const start = urlParams.get('start');
-                const end = urlParams.get('end');
-                let many = parseInt(urlParams.get('many'));
-    
+                const id = "{{ board.pk }}";
+                const start = "{{ board.s_title }}";
+                const end = "{{ board.d_title }}";
+                let many = parseInt("{{ board.people }}");
                 // 출력
                 const idOutput = document.getElementById('key');
                 idOutput.innerText = `${id}. ${start} 부터 ${end} 까지 같이 가요!`;

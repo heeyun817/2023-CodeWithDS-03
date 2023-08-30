@@ -21,8 +21,8 @@ def mypage(request):
     user_profile.signup_date = user.date_joined
     # user_profile.phone_number = user.userprofile.phone_number  # User 모델에서 phone_number 가져오기
     user_profile.save()
-
-    return render(request, 'mypage.html', {'user_profile': user_profile})
+    completed_boards = Board.objects.filter(completion=True, member=user).distinct()  # users=user
+    return render(request, 'mypage.html', {'user_profile': user_profile,'completed_boards': completed_boards})
 
 #이름, 프로필 사진만 변경 -> 이메일 변경 x
 @login_required
@@ -41,17 +41,56 @@ def edit_mypage(request):
 
     return render(request, 'edit_mypage.html',  {'form': form, 'user_profile': user_profile, 'request_user': request.user})
 
+# 이름 변경
+@login_required
+def edit_myname(request):
+    user = request.user  # 현재 로그인한 사용자
+    user_profile = UserProfile.objects.get(user=request.user)
+    if request.method == 'POST':
+        user.username = request.POST['username']
+        user.save()
+        return redirect('mypage:mypage')
 
-# 사용 기록 (자신이 작성 + 구함 완료까지) -> 다른 사용자 추가 하는 것도 구현 해야함
-def completed_boards(request):
-    user = request.user
-    # 현재 사용자와 연결된 채팅방을 먼저 가져옵니다.
-    # chat_rooms = ChatRoom.objects.filter(user_group=user)
+    return render(request, 'nameEdit.html',  {'user_profile': user_profile, 'request_user': request.user})
 
-    # 채팅방과 연결된 게시글을 가져옵니다.
-    # completed_boards = Board.objects.filter(Q(completion=True, chatroom__in=chat_rooms) | Q(user=user, completion=True))
-    completed_boards = Board.objects.filter(completion=True,member=user).distinct() #users=user
-    return render(request, 'completed_boards.html', {'completed_boards': completed_boards})
+# 이메일 변경
+@login_required
+def edit_myemail(request):
+    user = request.user  # 현재 로그인한 사용자
+    user_profile = UserProfile.objects.get(user=request.user)
+    if request.method == 'POST':
+        user.email = request.POST['email']
+        user.save()
+        return redirect('mypage:mypage')
+
+    return render(request, 'emailEdit.html',  {'user_profile': user_profile, 'request_user': request.user})
+
+# 프로필사진 변경
+@login_required
+def edit_myimage(request):
+    user_profile = UserProfile.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            return redirect('mypage:mypage')
+    else:
+        form = UserProfileForm(instance=user_profile)
+
+    return render(request, 'imageEdit.html',
+                  {'form': form, 'user_profile': user_profile, 'request_user': request.user})
+
+
+# # 사용 기록
+# def completed_boards(request):
+#     user = request.user
+#     # 현재 사용자와 연결된 채팅방을 먼저 가져옵니다.
+#     # chat_rooms = ChatRoom.objects.filter(user_group=user)
+#
+#     # 채팅방과 연결된 게시글을 가져옵니다.
+#     # completed_boards = Board.objects.filter(Q(completion=True, chatroom__in=chat_rooms) | Q(user=user, completion=True))
+#     completed_boards = Board.objects.filter(completion=True,member=user).distinct() #users=user
+#     return render(request, 'completed_boards.html', {'completed_boards': completed_boards})
 
 
 

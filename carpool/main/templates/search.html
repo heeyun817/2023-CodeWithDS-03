@@ -2,48 +2,120 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home/home.css' %}">
+
+    <div class="header">
+        <div>
+            <a href="{% url 'main:search' %}"><span class="click-text">Home</span></a>
+
+            <a href="{% url 'board:main' %}">Board</a>
+            <a href="{% url 'mypage:mypage' %}">My Page</a>
+        </div>
+
+        <div>
+            <a href="{% url 'main:first' %}" style="padding-right: 10px;">로그아웃</a>
+        </div>
+
+</div>
+
 </head>
-<body>
-<h1>게시판 검색</h1>
-    <form method="GET" action="{% url 'main:search_result' %}">
-    <input type="text" name="search_text" placeholder="검색어 입력">
-    <br>
-    <input type="radio" name="search_type" value="s_title" checked> 덕대로 도착
-    <input type="radio" name="search_type" value="d_title"> 덕대에서 출발
-    <br>
-    <input type="radio" name="transport_type" value="taxi" checked> 택시 선택
-    <input type="radio" name="transport_type" value="walk"> 걷기 선택
-    <br>
-    <button type="submit">검색</button>
-    <br>
-    <button type="submit" name="search_text" value="수유역">수유역</button>
-    <button type="submit" name="search_text" value="서울역">서울역</button>
-    <button type="submit" name="search_text" value="덕성여대">덕성여대 정문</button>
-    <button type="submit" name="search_text" value="덕성여대 후문">덕성여대 후문</button>
-</form>
+<body style = "margin:0px">
+    <div class="home-container">
+        <div class="where">
+            <form method="GET" action="{% url 'main:search_result' %}">
+                <div class="search-box">
+                    <h3><span class="red-text">Dukxi</span>와 함께
+                        <br>어디로 가볼까요?</h3>
+                    <div class="search-input">
+                        <select id="location-select" name="search_type">
+                        <option value="s_title" selected>덕대로 도착</option>
+                        <option value="d_title">덕대에서 출발</option>
+                        </select>
+                        <select id="transport-select" name="transport_type">
+        <option value="taxi" selected>택시 선택</option>
+        <option value="walk">걷기 선택</option>
+    </select>
+                        <input type="text" name="search_text" placeholder="출발지, 도착지 검색하기">
+                        <button type="submit"><img src="{% static 'image/search_icon.png' %}" alt="Search Icon" class="icon" ></button>
 
-<button onclick="redirectToBoard()">택시 직접 찾아보기</button><br>
-<button onclick="walkredirectToBoard()">걷기 직접 찾아보기</button><br>
-<button onclick="createNewPost()">함께 택시 탈 멤버 직접 모아보기</button>
-<button onclick="walkcreateNewPost()">함께 걸을 멤버 직접 모아보기</button>
-<br>
+                    </div>
+                </div>
 
-<script>
-function walkredirectToBoard() {
-        window.location.href = "{% url 'board:walklist' %}";
-    }
-    function redirectToBoard() {
-        window.location.href = "{% url 'board:list' %}";
-    }
-
-    function createNewPost() {
-        window.location.href = "{% url 'board:create' %}";
-    }
-    function walkcreateNewPost() {
-        window.location.href = "{% url 'board:walkcreate' %}";
-    }
-</script>
-
+                <div class="recommendations">
+                    <h3>여긴 어때요?</h3>
+                    <ul class="place-list">
+                        <li><button type="submit" name="search_text" value="덕성여대">덕성여대 정문</button></li>
+                        <li><button type="submit" name="search_text" value="수유역">수유역</button></li>
+                        <li><button type="submit" name="search_text" value="덕성여대 후문">덕성여대 후문</button></li>
+                        <li><button type="submit" name="search_text" value="서울역">서울역</button></li>
+                    </ul>
+                </div>
+            </form>
+            <hr>
+            <div class="navigation">
+                <ul class="choose">
+                    <li><a href="{% url 'board:list' %}">택시 직접 찾아보기</a></li>
+                    <li><a href="{% url 'board:create' %}">함께 택시 탈 멤버 직접 모집하기</a></li>
+                    <li><a href="{% url 'board:walklist' %}">걷기 직접 찾아보기</a></li>
+                    <li><a href="{% url 'board:walkcreate' %}">함께 걸을 멤버 직접 모집하기</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>게시판 검색</h1>-->
+<!--    <form method="GET" action="{% url 'main:search_result' %}">-->
+<!--    <input type="text" name="search_text" placeholder="검색어 입력">-->
+<!--    <br>-->
+<!--    <input type="radio" name="search_type" value="s_title" checked> 덕대로 도착-->
+<!--    <input type="radio" name="search_type" value="d_title"> 덕대에서 출발-->
+<!--    <br>-->
+<!--    <input type="radio" name="transport_type" value="taxi" checked> 택시 선택-->
+<!--    <input type="radio" name="transport_type" value="walk"> 걷기 선택-->
+<!--    <br>-->
+<!--    <button type="submit">검색</button>-->
+<!--    <br>-->
+<!--    <button type="submit" name="search_text" value="수유역">수유역</button>-->
+<!--    <button type="submit" name="search_text" value="서울역">서울역</button>-->
+<!--    <button type="submit" name="search_text" value="덕성여대">덕성여대 정문</button>-->
+<!--    <button type="submit" name="search_text" value="덕성여대 후문">덕성여대 후문</button>-->
+<!--</form>-->
+
+<!--<button onclick="redirectToBoard()">택시 직접 찾아보기</button><br>-->
+<!--<button onclick="walkredirectToBoard()">걷기 직접 찾아보기</button><br>-->
+<!--<button onclick="createNewPost()">함께 택시 탈 멤버 직접 모아보기</button>-->
+<!--<button onclick="walkcreateNewPost()">함께 걸을 멤버 직접 모아보기</button>-->
+<!--<br>-->
+
+<!--<script>-->
+<!--function walkredirectToBoard() {-->
+<!--        window.location.href = "{% url 'board:walklist' %}";-->
+<!--    }-->
+<!--    function redirectToBoard() {-->
+<!--        window.location.href = "{% url 'board:list' %}";-->
+<!--    }-->
+
+<!--    function createNewPost() {-->
+<!--        window.location.href = "{% url 'board:create' %}";-->
+<!--    }-->
+<!--    function walkcreateNewPost() {-->
+<!--        window.location.href = "{% url 'board:walkcreate' %}";-->
+<!--    }-->
+<!--</script>-->
+
+<!--</body>-->
+<!--</html>-->

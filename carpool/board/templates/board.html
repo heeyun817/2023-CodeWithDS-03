@@ -19,7 +19,7 @@
 <body style="margin:0px">
     <div id="App">
         <div id="my-page-nav">
-            <a href="{% url 'main:home' %}">
+            <a href="{% url 'main:search' %}">
                 <span class="material-symbols-outlined" id="back">
                     arrow_back_ios_new
                 </span>
@@ -61,7 +61,13 @@
             <!-- <span class="material-icons" id="plus">
                 add_circle_outline
             </span> -->
-            글작성    
+            택시 글작성
+        </a>
+        <a href="{% url 'board:walkcreate' %}">
+            <!-- <span class="material-icons" id="plus">
+                add_circle_outline
+            </span> -->
+            걷기 글작성
         </a>
         <footer id="footer">
             CodeWithDuksung 03

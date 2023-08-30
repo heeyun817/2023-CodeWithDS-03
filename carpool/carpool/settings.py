@@ -132,7 +132,7 @@ AUTHENTICATION_BACKENDS = [
 # # DEFAULT_FROM_EMAIL = 'your_email@duksung.ac.kr'  # 보내는 이메일 계정
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.naver.com'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'kyumin991105@gmail.com'  # 보내는 이메일 계정

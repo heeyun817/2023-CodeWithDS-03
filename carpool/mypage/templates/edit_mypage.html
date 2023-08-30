@@ -14,7 +14,7 @@
 <body id = "body">
     <div id="App">
         <div id="my-page-nav">
-            <a href= "{% static 'mypage:mypage' %}">
+            <a href= "{% url 'mypage:mypage' %}">
                 <span class="material-symbols-outlined" id="back">
                 arrow_back_ios_new
                 </span>
@@ -31,11 +31,11 @@
               <td>
                 <div id='profilelist'>
                   <li style="text-align: left;">
-                    <div id="profile-name">안녕하세요, <span id="new-name">{{ name }}</span> 님!</div>
+                    <div id="profile-name">안녕하세요, <span id="new-name">{{ user_profile.username }}</span> 님!</div>
                   </li> <br/>
                   <li>
                     <div style="text-align: left;">
-                        <span id="profile-email"><span id="new-email">{{ email }}</span></span>
+                        <span id="profile-email"><span id="new-email">{{ user_profile.email }}</span></span>
                     </div>
                   </li><br/>
                 </div>
@@ -43,16 +43,16 @@
             </tbody>
           </table><hr/><br/><hr/>
         
-        <a href="{% url 'mypage:nameedit' %}" class="editpage">
+        <a href="{% url 'mypage:edit_myname' %}" class="editpage">
             <h3>이름 변경</h3>
         </a><hr/><br/><hr/>
 
-        <a href="{% url 'mypage:emailedit' %}" class="editpage">
+        <a href="{% url 'mypage:edit_myemail' %}" class="editpage">
             <h3>이메일 변경</h3>
         </a><hr/><br/><hr/>
 
-        <a href="{% url 'mypage:password' %}" class="editpage">
-            <h3>비밀번호 변경</h3>
+        <a href="{% url 'mypage:edit_myimage' %}" class="editpage">
+            <h3>프로필 사진 변경</h3>
         </a><hr/><br/><br/><br/><br/>
 
         <footer id='footer'>

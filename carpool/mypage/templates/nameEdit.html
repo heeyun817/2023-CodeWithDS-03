@@ -23,12 +23,12 @@
             <div></div>
         </div>
         <br /><br /><br />
-        <form class="edit-profile-form">
-            <label for="new-name">새로운 이름:</label>
-            <input type="text" id="new-name" name="new-name"><br><br>
-            <button class="b" type="button" id="update-profile">저장</button>
+        <form class="edit-profile-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="username">새로운 이름:</label>
+            <input type="text" id="new-name" name="username" value="{{ user.username }}"><br><br>
+            <button class="b" type="submit" id="update-profile">저장</button>
         </form>
-        
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 const updateButton = document.getElementById("update-profile");
